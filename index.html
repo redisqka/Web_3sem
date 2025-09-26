@@ -1,1 +1,100 @@
 <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset = "UTF-8">
+
+    <!-- предзагрузка шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- подключение шрифта -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- подключение стилей -->
+    <link rel = "stylesheet" href ="./style.css">
+    <title>Food Construct</title>
+</head>
+<body>
+
+<header>
+    <h1 class = "header_text">Food Construct</h1>
+    <nav>
+        <ul class="header_ul">
+            <li class="header_li"><a class = "nav_link" href="#about">О нас</a></li>
+            <li class="header_li"><a class = "nav_link" href="#advantage">Собрать ланч</a></li>
+            <li class="header_li"><a class = "nav_link" href="#rating">Заказы</a></li>
+            <li class="header_li"><a class = "nav_link" href="#footer">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="about">
+        <div class="container">
+            <img class="about_img" src="images/about.jpg" alt="Фото ланча">
+            <h2>О нас</h2>
+            <p>Food Construct - доставка бизнес-ланчей в Москве. Мы привезём вам горячую вкусную еду в любую точку города к назначенному времени.</p>
+        </div>
+    </section>
+
+    <section id="advantage">
+        <div class="container">
+            <h2>Преимущество Food Construct</h2>
+            <ul class="advantage_ul">
+                <li class="advantage_li">Привозим вовремя и без опозданий</li>
+                <li class="advantage_li">Надежно упаковываем блюда в удобные контейнеры бесплатно</li>
+                <li class="advantage_li">Доставляем ланчи весь день с 7:00 до 23:00</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="rating">
+        <div class="container">
+            <h2>Топ-5 популярных блюд</h2>
+            <table>
+                <tr>
+                    <th>№</th>
+                    <th>Название</th>
+                    <th>Кол-во заказов<br>в неделю</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Лазанья</td>
+                    <td>185</td>
+                    <td>385₽</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Том Ям с креветками</td>
+                    <td>161</td>
+                    <td>365₽</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Норвежский суп</td>
+                    <td>144</td>
+                    <td>270₽</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Жареная картошка с грибами</td>
+                    <td>132</td>
+                    <td>150₽</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Котлеты из курицы<br>с картофельным пюре</td>
+                    <td>128</td>
+                    <td>225₽</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</main>
+
+<footer id="footer">
+    Позвонить нам +78000000000
+</footer>
+
+</body>
+</html>
