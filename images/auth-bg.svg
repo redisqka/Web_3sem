@@ -1,0 +1,17 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="authBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffe3d9"/>
+            <stop offset="100%" stop-color="#ffc5ac"/>
+        </linearGradient>
+        <radialGradient id="authGlow" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#ffd0ba" stop-opacity="0.2"/>
+        </radialGradient>
+    </defs>
+    <rect width="1600" height="900" fill="url(#authBgGradient)"/>
+    <circle cx="800" cy="360" r="420" fill="url(#authGlow)"/>
+    <circle cx="360" cy="620" r="240" fill="#ffd9c5" opacity="0.6"/>
+    <circle cx="1240" cy="640" r="300" fill="#ffb399" opacity="0.45"/>
+    <path d="M260 540 C 420 460, 560 460, 720 540 C 880 620, 1020 620, 1180 540 C 1320 470, 1460 470, 1540 520 L 1540 900 L 60 900 L 60 560 C 120 540, 200 560, 260 540 Z" fill="#fff6f1" opacity="0.65"/>
+</svg>

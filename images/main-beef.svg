@@ -1,0 +1,15 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="beefBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffeaea"/>
+            <stop offset="100%" stop-color="#ffb3a7"/>
+        </linearGradient>
+    </defs>
+    <rect width="600" height="400" rx="40" fill="url(#beefBg)"/>
+    <ellipse cx="300" cy="225" rx="195" ry="110" fill="#d04f4f" opacity="0.88"/>
+    <ellipse cx="300" cy="215" rx="130" ry="74" fill="#ffcfbe"/>
+    <path d="M210 240 L 390 240" stroke="#fefefe" stroke-width="18" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="260" cy="210" r="20" fill="#9b2e2e"/>
+    <circle cx="340" cy="235" r="22" fill="#9b2e2e"/>
+    <text x="300" y="350" font-family="Montserrat, sans-serif" font-size="36" text-anchor="middle" fill="#702020">Говяжьи щёчки</text>
+</svg>

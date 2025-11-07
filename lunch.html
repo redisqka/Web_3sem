@@ -37,105 +37,115 @@
         <div class="container hero-container"> <!-- Контейнер для контента героя -->
             <div class="hero_text"> <!-- Текстовый блок героя -->
                 <h2 class="hero_title">Соберите идеальный бизнес-ланч</h2> <!-- Заголовок промо-блока -->
-                <p class="hero_subtitle">Выбирайте любимые блюда, комбинируйте супы, горячее и напитки — мы доставим всё вовремя и горячим.</p> <!-- Описание возможностей конструктора -->
+                <p class="hero_subtitle">Выбирайте суп, основное блюдо и напиток — мы доставим собранный набор в удобное время.</p> <!-- Описание возможностей конструктора -->
                 <a class="primary-button hero_button" href="#soups">Начать подбор</a> <!-- Кнопка с якорной ссылкой на блок супов -->
             </div> <!-- Завершаем текстовый блок героя -->
-            <img class="hero_image" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Ассорти бизнес-ланча"> <!-- Иллюстрация для героя -->
+            <div class="hero_image-wrapper"> <!-- Обёртка для изображения героя для сохранения пропорций -->
+                <img class="hero_image" src="images/hero-lunch.svg" alt="Иллюстрация с ланч-набором"> <!-- Локальная иллюстрация для промо-блока -->
+            </div> <!-- Завершаем обёртку изображения героя -->
         </div> <!-- Завершаем контейнер героя -->
     </section> <!-- Завершаем промо-блок -->
     <section id="soups" class="menu-section"> <!-- Раздел с супами -->
-        <div class="container"> <!-- Контейнер раздела -->
-            <h2 class="menu-title">Супы</h2> <!-- Заголовок раздела -->
+        <div class="container menu-container"> <!-- Контейнер раздела с ограничением ширины -->
+            <header class="menu-section_header"> <!-- Шапка раздела с заголовком и подписью -->
+                <h2 class="menu-title">Супы</h2> <!-- Заголовок раздела -->
+                <p class="menu-subtitle">Тёплое начало обеда</p> <!-- Короткое описание раздела -->
+            </header> <!-- Завершаем шапку раздела -->
             <div class="dish-grid soups-grid"> <!-- Грид со списком супов -->
-                <div class="dish-card"> <!-- Карточка блюда супа -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1604908176997-12518821c50e?auto=format&fit=crop&w=800&q=80" alt="Тыквенный крем-суп"> <!-- Изображение блюда -->
+                <article class="dish-card"> <!-- Карточка блюда супа -->
+                    <img class="dish-image" src="images/soup-pumpkin.svg" alt="Тыквенный крем-суп"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Тыквенный крем-суп</p> <!-- Название блюда -->
                     <p class="dish-price">320₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">250 мл</p> <!-- Вес или объём блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
-                <div class="dish-card"> <!-- Карточка второго блюда -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1621872324841-8ee3f66544dd?auto=format&fit=crop&w=800&q=80" alt="Минестроне с овощами"> <!-- Изображение блюда -->
+                </article> <!-- Завершаем карточку блюда -->
+                <article class="dish-card"> <!-- Карточка второго блюда -->
+                    <img class="dish-image" src="images/soup-minestrone.svg" alt="Минестроне с овощами"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Минестроне с овощами</p> <!-- Название блюда -->
                     <p class="dish-price">340₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">280 мл</p> <!-- Вес или объём блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
-                <div class="dish-card"> <!-- Карточка третьего блюда -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1612874472778-4d71088c1f42?auto=format&fit=crop&w=800&q=80" alt="Том-ям с креветками"> <!-- Изображение блюда -->
+                </article> <!-- Завершаем карточку блюда -->
+                <article class="dish-card"> <!-- Карточка третьего блюда -->
+                    <img class="dish-image" src="images/soup-tomyam.svg" alt="Том-ям с креветками"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Том-ям с креветками</p> <!-- Название блюда -->
                     <p class="dish-price">390₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">260 мл</p> <!-- Вес или объём блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
+                </article> <!-- Завершаем карточку блюда -->
             </div> <!-- Завершаем грид супов -->
         </div> <!-- Завершаем контейнер раздела -->
     </section> <!-- Завершаем раздел супов -->
     <section id="mains" class="menu-section"> <!-- Раздел с горячими блюдами -->
-        <div class="container"> <!-- Контейнер раздела -->
-            <h2 class="menu-title">Горячие блюда</h2> <!-- Заголовок раздела -->
+        <div class="container menu-container"> <!-- Контейнер раздела с ограничением ширины -->
+            <header class="menu-section_header"> <!-- Шапка раздела горячих блюд -->
+                <h2 class="menu-title">Горячие блюда</h2> <!-- Заголовок раздела -->
+                <p class="menu-subtitle">Основы вашего ланча</p> <!-- Дополнительное описание -->
+            </header> <!-- Завершаем шапку раздела -->
             <div class="dish-grid mains-grid"> <!-- Грид со списком горячих блюд -->
-                <div class="dish-card"> <!-- Карточка горячего блюда -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1555992336-cbf2c696e09e?auto=format&fit=crop&w=800&q=80" alt="Тальятелле с лососем"> <!-- Изображение блюда -->
+                <article class="dish-card"> <!-- Карточка горячего блюда -->
+                    <img class="dish-image" src="images/main-tagliatelle.svg" alt="Тальятелле с лососем"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Тальятелле с лососем</p> <!-- Название блюда -->
                     <p class="dish-price">450₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">320 г</p> <!-- Вес блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
-                <div class="dish-card"> <!-- Карточка второго горячего блюда -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=800&q=80" alt="Куриная грудка с киноа"> <!-- Изображение блюда -->
+                </article> <!-- Завершаем карточку блюда -->
+                <article class="dish-card"> <!-- Карточка второго горячего блюда -->
+                    <img class="dish-image" src="images/main-chicken.svg" alt="Куриная грудка с киноа"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Куриная грудка с киноа</p> <!-- Название блюда -->
                     <p class="dish-price">410₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">300 г</p> <!-- Вес блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
-                <div class="dish-card"> <!-- Карточка третьего горячего блюда -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Говяжьи щёчки с пюре"> <!-- Изображение блюда -->
+                </article> <!-- Завершаем карточку блюда -->
+                <article class="dish-card"> <!-- Карточка третьего горячего блюда -->
+                    <img class="dish-image" src="images/main-beef.svg" alt="Говяжьи щёчки с пюре"> <!-- Локальное изображение блюда -->
                     <p class="dish-name">Говяжьи щёчки с пюре</p> <!-- Название блюда -->
                     <p class="dish-price">480₽</p> <!-- Стоимость блюда -->
                     <p class="dish-weight">310 г</p> <!-- Вес блюда -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
-                </div> <!-- Завершаем карточку блюда -->
+                </article> <!-- Завершаем карточку блюда -->
             </div> <!-- Завершаем грид горячих блюд -->
         </div> <!-- Завершаем контейнер раздела -->
     </section> <!-- Завершаем раздел горячих блюд -->
     <section id="drinks" class="menu-section"> <!-- Раздел с напитками -->
-        <div class="container"> <!-- Контейнер раздела -->
-            <h2 class="menu-title">Напитки</h2> <!-- Заголовок раздела -->
+        <div class="container menu-container"> <!-- Контейнер раздела с ограничением ширины -->
+            <header class="menu-section_header"> <!-- Шапка раздела напитков -->
+                <h2 class="menu-title">Напитки</h2> <!-- Заголовок раздела -->
+                <p class="menu-subtitle">Освежающие вкусы</p> <!-- Короткое описание раздела -->
+            </header> <!-- Завершаем шапку раздела -->
             <div class="dish-grid drinks-grid"> <!-- Грид со списком напитков -->
-                <div class="dish-card"> <!-- Карточка напитка -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80" alt="Морс из черники"> <!-- Изображение напитка -->
-                    <p class="dish-name">Морс из черники</p> <!-- Название напитка -->
+                <article class="dish-card"> <!-- Карточка напитка -->
+                    <img class="dish-image" src="images/drink-blueberry.svg" alt="Черничный морс"> <!-- Локальное изображение напитка -->
+                    <p class="dish-name">Черничный морс</p> <!-- Название напитка -->
                     <p class="dish-price">150₽</p> <!-- Стоимость напитка -->
                     <p class="dish-weight">250 мл</p> <!-- Объём напитка -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
-                </div> <!-- Завершаем карточку напитка -->
-                <div class="dish-card"> <!-- Карточка второго напитка -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1601041390373-0fd15d05b77d?auto=format&fit=crop&w=800&q=80" alt="Матча латте"> <!-- Изображение напитка -->
+                </article> <!-- Завершаем карточку напитка -->
+                <article class="dish-card"> <!-- Карточка второго напитка -->
+                    <img class="dish-image" src="images/drink-matcha.svg" alt="Матча латте"> <!-- Локальное изображение напитка -->
                     <p class="dish-name">Матча латте</p> <!-- Название напитка -->
                     <p class="dish-price">180₽</p> <!-- Стоимость напитка -->
                     <p class="dish-weight">250 мл</p> <!-- Объём напитка -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
-                </div> <!-- Завершаем карточку напитка -->
-                <div class="dish-card"> <!-- Карточка третьего напитка -->
-                    <img class="dish-image" src="https://images.unsplash.com/photo-1546171753-97d7676ea789?auto=format&fit=crop&w=800&q=80" alt="Апельсиновый фреш"> <!-- Изображение напитка -->
+                </article> <!-- Завершаем карточку напитка -->
+                <article class="dish-card"> <!-- Карточка третьего напитка -->
+                    <img class="dish-image" src="images/drink-orange.svg" alt="Апельсиновый фреш"> <!-- Локальное изображение напитка -->
                     <p class="dish-name">Апельсиновый фреш</p> <!-- Название напитка -->
                     <p class="dish-price">210₽</p> <!-- Стоимость напитка -->
                     <p class="dish-weight">300 мл</p> <!-- Объём напитка -->
                     <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
-                </div> <!-- Завершаем карточку напитка -->
+                </article> <!-- Завершаем карточку напитка -->
             </div> <!-- Завершаем грид напитков -->
         </div> <!-- Завершаем контейнер раздела -->
     </section> <!-- Завершаем раздел напитков -->
     <section id="special" class="menu-section combo-section"> <!-- Раздел со спецпредложением -->
-        <div class="container"> <!-- Контейнер раздела -->
-            <h2 class="menu-title">Комбо недели</h2> <!-- Заголовок раздела -->
+        <div class="container menu-container"> <!-- Контейнер раздела с ограничением ширины -->
             <div class="combo-card"> <!-- Карточка комбо-предложения -->
                 <div class="combo-info"> <!-- Текстовый блок комбо -->
-                    <p class="combo-name">Суп + горячее + напиток</p> <!-- Название комбо -->
-                    <p class="combo-details">Выберите любую комбинацию из меню — скидка 12% автоматически применится в корзине.</p> <!-- Описание комбо -->
+                    <h3 class="combo-name">Комбо недели</h3> <!-- Название комбо-предложения -->
+                    <p class="combo-details">Выберите любые три блюда из меню — скидка 12% применится автоматически при оформлении заказа.</p> <!-- Описание комбо -->
                 </div> <!-- Завершаем текстовый блок -->
-                <button class="primary-button combo-button" type="button">Добавить всё в корзину</button> <!-- Кнопка добавления комбо -->
+                <button class="primary-button combo-button" type="button">Добавить комбо</button> <!-- Кнопка добавления комбо -->
             </div> <!-- Завершаем карточку комбо -->
         </div> <!-- Завершаем контейнер раздела -->
     </section> <!-- Завершаем раздел со спецпредложением -->

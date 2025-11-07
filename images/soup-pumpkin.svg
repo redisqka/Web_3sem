@@ -1,0 +1,15 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="soupBg" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#fff0e4"/>
+            <stop offset="100%" stop-color="#ffc08e"/>
+        </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="600" height="400" rx="40" fill="url(#soupBg)"/>
+    <ellipse cx="300" cy="210" rx="180" ry="120" fill="#f9a25f"/>
+    <ellipse cx="300" cy="210" rx="120" ry="80" fill="#ffce8b"/>
+    <circle cx="280" cy="190" r="22" fill="#ff8c42"/>
+    <circle cx="340" cy="220" r="16" fill="#ff8c42"/>
+    <path d="M180 136 Q300 80 420 136" stroke="#fff" stroke-width="18" stroke-linecap="round" fill="none" opacity="0.4"/>
+    <text x="300" y="340" font-family="Montserrat, sans-serif" font-size="40" text-anchor="middle" fill="#7a3d1b">Тыквенный крем-суп</text>
+</svg>

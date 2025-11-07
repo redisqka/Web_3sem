@@ -1,0 +1,14 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="drinkOrangeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff2e6"/>
+            <stop offset="100%" stop-color="#ffd1a1"/>
+        </linearGradient>
+    </defs>
+    <rect width="600" height="400" rx="40" fill="url(#drinkOrangeBg)"/>
+    <circle cx="300" cy="210" r="125" fill="#ffa640"/>
+    <circle cx="300" cy="210" r="85" fill="#ffe3b9"/>
+    <line x1="300" y1="130" x2="300" y2="290" stroke="#ffb35c" stroke-width="12" stroke-linecap="round"/>
+    <line x1="230" y1="210" x2="370" y2="210" stroke="#ffb35c" stroke-width="12" stroke-linecap="round"/>
+    <text x="300" y="340" font-family="Montserrat, sans-serif" font-size="36" text-anchor="middle" fill="#9a560a">Апельсиновый фреш</text>
+</svg>

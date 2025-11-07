@@ -1,0 +1,15 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="pastaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff3d9"/>
+            <stop offset="100%" stop-color="#ffe2a7"/>
+        </linearGradient>
+    </defs>
+    <rect width="600" height="400" rx="40" fill="url(#pastaBg)"/>
+    <path d="M150 220 C 220 120, 380 120, 450 220 C 430 320, 170 320, 150 220 Z" fill="#f4b631"/>
+    <path d="M180 210 C 260 150, 340 270, 420 210" stroke="#f7d36f" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="M170 250 C 260 180, 340 330, 430 250" stroke="#f7d36f" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <circle cx="240" cy="210" r="18" fill="#f46b45"/>
+    <circle cx="360" cy="250" r="16" fill="#f46b45"/>
+    <text x="300" y="350" font-family="Montserrat, sans-serif" font-size="38" text-anchor="middle" fill="#7a4c1c">Тальятелле</text>
+</svg>

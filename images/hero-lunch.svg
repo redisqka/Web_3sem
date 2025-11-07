@@ -1,0 +1,17 @@
+<svg width="900" height="600" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffe1d5"/>
+            <stop offset="100%" stop-color="#ffc6b0"/>
+        </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="900" height="600" rx="48" fill="url(#bg)"/>
+    <g transform="translate(80,120)">
+        <circle cx="120" cy="120" r="110" fill="#ffb199"/>
+        <circle cx="320" cy="220" r="140" fill="#ff987a" opacity="0.7"/>
+        <circle cx="520" cy="140" r="120" fill="#ff7f63" opacity="0.6"/>
+        <path d="M130 200 C 200 260, 320 260, 380 210 C 430 170, 520 190, 600 140 C 660 100, 780 140, 780 220 L 780 320 L 130 320 Z" fill="#fff6f2" opacity="0.85"/>
+        <text x="40" y="360" font-family="Montserrat, sans-serif" font-size="54" font-weight="700" fill="#5a2d22">Food Construct</text>
+        <text x="40" y="420" font-family="Montserrat, sans-serif" font-size="32" font-weight="500" fill="#5a2d22">Собери ланч мечты</text>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient id="minBg" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#fff6de"/>
+            <stop offset="100%" stop-color="#ffd36c"/>
+        </radialGradient>
+    </defs>
+    <rect width="600" height="400" rx="40" fill="url(#minBg)"/>
+    <ellipse cx="300" cy="210" rx="185" ry="115" fill="#f57f5b" opacity="0.85"/>
+    <ellipse cx="300" cy="210" rx="125" ry="78" fill="#ffd8a2"/>
+    <circle cx="260" cy="200" r="18" fill="#f55454"/>
+    <circle cx="330" cy="225" r="22" fill="#5fcf80"/>
+    <circle cx="300" cy="250" r="14" fill="#ffecb0"/>
+    <text x="300" y="340" font-family="Montserrat, sans-serif" font-size="40" text-anchor="middle" fill="#74491f">Минестроне</text>
+</svg>
