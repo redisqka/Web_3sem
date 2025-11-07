@@ -1,0 +1,149 @@
+<!DOCTYPE html> <!-- Объявляем документ в формате HTML5 -->
+<html lang="ru"> <!-- Указываем, что основной язык страницы русский -->
+<head> <!-- Начинаем раздел с метаданными и подключениями -->
+    <meta charset="UTF-8"> <!-- Задаём кодировку символов UTF-8 для корректного отображения текста -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Устанавливаем корректное масштабирование для адаптивности -->
+    <!-- Предзагрузка шрифтов: готовим браузер к загрузке ресурсов Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Создаём предварительное соединение с доменом, где лежат стили шрифтов -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Открываем предварительное соединение к домену со статическими файлами шрифтов с поддержкой кросс-доменных запросов -->
+    <!-- Подключение шрифта: загружаем гарнитуру Montserrat со всеми вариациями -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> <!-- Подключаем CSS с нужным шрифтом -->
+    <!-- Подключение общих стилей сайта -->
+    <link rel="stylesheet" href="./style.css"> <!-- Используем общую таблицу стилей для повторяющихся элементов -->
+    <!-- Подключение специфичных стилей страницы "Собрать ланч" -->
+    <link rel="stylesheet" href="./lunch.css"> <!-- Подключаем дополнительные стили для сетки меню -->
+    <!-- Подключение стилей для печати -->
+    <link rel="stylesheet" href="./print.css" media="print"> <!-- Подключаем таблицу стилей, применяемую только при печати -->
+    <title>Food Construct — Собрать ланч</title> <!-- Заголовок вкладки браузера -->
+</head> <!-- Завершаем раздел метаданных -->
+<body class="page-body"> <!-- Начинаем основное тело документа и задаём класс для flex-лейаута -->
+<header class="site-header"> <!-- Шапка сайта с логотипом и меню -->
+    <div class="container header-container"> <!-- Контейнер для выравнивания контента шапки -->
+        <h1 class="header_text">Food Construct</h1> <!-- Главный заголовок сайта с классом для стилизации -->
+        <nav class="header_nav"> <!-- Блок навигации по разделам и страницам -->
+            <ul class="header_menu"> <!-- Флекс-меню с пунктами навигации -->
+                <li class="header_item"><a class="nav_link" href="./index.html">Главная</a></li> <!-- Ссылка на главную страницу -->
+                <li class="header_item"><a class="nav_link active" href="./lunch.html">Собрать ланч</a></li> <!-- Ссылка на текущую страницу с выделением активного пункта -->
+                <li class="header_item"><a class="nav_link" href="#soups">Супы</a></li> <!-- Переход к разделу супов -->
+                <li class="header_item"><a class="nav_link" href="#mains">Горячие блюда</a></li> <!-- Переход к разделу горячих блюд -->
+                <li class="header_item"><a class="nav_link" href="#drinks">Напитки</a></li> <!-- Переход к разделу напитков -->
+                <li class="header_item"><a class="nav_link" href="#special">Комбо</a></li> <!-- Переход к разделу спецпредложений -->
+            </ul> <!-- Завершаем список элементов меню -->
+        </nav> <!-- Закрываем блок навигации -->
+    </div> <!-- Завершаем контейнер шапки -->
+</header> <!-- Завершаем шапку страницы -->
+<main class="page-main"> <!-- Основная содержательная часть сайта -->
+    <section class="hero"> <!-- Промо-блок с описанием конструктора ланчей -->
+        <div class="container hero-container"> <!-- Контейнер для контента героя -->
+            <div class="hero_text"> <!-- Текстовый блок героя -->
+                <h2 class="hero_title">Соберите идеальный бизнес-ланч</h2> <!-- Заголовок промо-блока -->
+                <p class="hero_subtitle">Выбирайте любимые блюда, комбинируйте супы, горячее и напитки — мы доставим всё вовремя и горячим.</p> <!-- Описание возможностей конструктора -->
+                <a class="primary-button hero_button" href="#soups">Начать подбор</a> <!-- Кнопка с якорной ссылкой на блок супов -->
+            </div> <!-- Завершаем текстовый блок героя -->
+            <img class="hero_image" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Ассорти бизнес-ланча"> <!-- Иллюстрация для героя -->
+        </div> <!-- Завершаем контейнер героя -->
+    </section> <!-- Завершаем промо-блок -->
+    <section id="soups" class="menu-section"> <!-- Раздел с супами -->
+        <div class="container"> <!-- Контейнер раздела -->
+            <h2 class="menu-title">Супы</h2> <!-- Заголовок раздела -->
+            <div class="dish-grid soups-grid"> <!-- Грид со списком супов -->
+                <div class="dish-card"> <!-- Карточка блюда супа -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1604908176997-12518821c50e?auto=format&fit=crop&w=800&q=80" alt="Тыквенный крем-суп"> <!-- Изображение блюда -->
+                    <p class="dish-name">Тыквенный крем-суп</p> <!-- Название блюда -->
+                    <p class="dish-price">320₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">250 мл</p> <!-- Вес или объём блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+                <div class="dish-card"> <!-- Карточка второго блюда -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1621872324841-8ee3f66544dd?auto=format&fit=crop&w=800&q=80" alt="Минестроне с овощами"> <!-- Изображение блюда -->
+                    <p class="dish-name">Минестроне с овощами</p> <!-- Название блюда -->
+                    <p class="dish-price">340₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">280 мл</p> <!-- Вес или объём блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+                <div class="dish-card"> <!-- Карточка третьего блюда -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1612874472778-4d71088c1f42?auto=format&fit=crop&w=800&q=80" alt="Том-ям с креветками"> <!-- Изображение блюда -->
+                    <p class="dish-name">Том-ям с креветками</p> <!-- Название блюда -->
+                    <p class="dish-price">390₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">260 мл</p> <!-- Вес или объём блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+            </div> <!-- Завершаем грид супов -->
+        </div> <!-- Завершаем контейнер раздела -->
+    </section> <!-- Завершаем раздел супов -->
+    <section id="mains" class="menu-section"> <!-- Раздел с горячими блюдами -->
+        <div class="container"> <!-- Контейнер раздела -->
+            <h2 class="menu-title">Горячие блюда</h2> <!-- Заголовок раздела -->
+            <div class="dish-grid mains-grid"> <!-- Грид со списком горячих блюд -->
+                <div class="dish-card"> <!-- Карточка горячего блюда -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1555992336-cbf2c696e09e?auto=format&fit=crop&w=800&q=80" alt="Тальятелле с лососем"> <!-- Изображение блюда -->
+                    <p class="dish-name">Тальятелле с лососем</p> <!-- Название блюда -->
+                    <p class="dish-price">450₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">320 г</p> <!-- Вес блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+                <div class="dish-card"> <!-- Карточка второго горячего блюда -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=800&q=80" alt="Куриная грудка с киноа"> <!-- Изображение блюда -->
+                    <p class="dish-name">Куриная грудка с киноа</p> <!-- Название блюда -->
+                    <p class="dish-price">410₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">300 г</p> <!-- Вес блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+                <div class="dish-card"> <!-- Карточка третьего горячего блюда -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Говяжьи щёчки с пюре"> <!-- Изображение блюда -->
+                    <p class="dish-name">Говяжьи щёчки с пюре</p> <!-- Название блюда -->
+                    <p class="dish-price">480₽</p> <!-- Стоимость блюда -->
+                    <p class="dish-weight">310 г</p> <!-- Вес блюда -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления блюда -->
+                </div> <!-- Завершаем карточку блюда -->
+            </div> <!-- Завершаем грид горячих блюд -->
+        </div> <!-- Завершаем контейнер раздела -->
+    </section> <!-- Завершаем раздел горячих блюд -->
+    <section id="drinks" class="menu-section"> <!-- Раздел с напитками -->
+        <div class="container"> <!-- Контейнер раздела -->
+            <h2 class="menu-title">Напитки</h2> <!-- Заголовок раздела -->
+            <div class="dish-grid drinks-grid"> <!-- Грид со списком напитков -->
+                <div class="dish-card"> <!-- Карточка напитка -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80" alt="Морс из черники"> <!-- Изображение напитка -->
+                    <p class="dish-name">Морс из черники</p> <!-- Название напитка -->
+                    <p class="dish-price">150₽</p> <!-- Стоимость напитка -->
+                    <p class="dish-weight">250 мл</p> <!-- Объём напитка -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
+                </div> <!-- Завершаем карточку напитка -->
+                <div class="dish-card"> <!-- Карточка второго напитка -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1601041390373-0fd15d05b77d?auto=format&fit=crop&w=800&q=80" alt="Матча латте"> <!-- Изображение напитка -->
+                    <p class="dish-name">Матча латте</p> <!-- Название напитка -->
+                    <p class="dish-price">180₽</p> <!-- Стоимость напитка -->
+                    <p class="dish-weight">250 мл</p> <!-- Объём напитка -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
+                </div> <!-- Завершаем карточку напитка -->
+                <div class="dish-card"> <!-- Карточка третьего напитка -->
+                    <img class="dish-image" src="https://images.unsplash.com/photo-1546171753-97d7676ea789?auto=format&fit=crop&w=800&q=80" alt="Апельсиновый фреш"> <!-- Изображение напитка -->
+                    <p class="dish-name">Апельсиновый фреш</p> <!-- Название напитка -->
+                    <p class="dish-price">210₽</p> <!-- Стоимость напитка -->
+                    <p class="dish-weight">300 мл</p> <!-- Объём напитка -->
+                    <button class="dish-button" type="button">Добавить</button> <!-- Кнопка добавления напитка -->
+                </div> <!-- Завершаем карточку напитка -->
+            </div> <!-- Завершаем грид напитков -->
+        </div> <!-- Завершаем контейнер раздела -->
+    </section> <!-- Завершаем раздел напитков -->
+    <section id="special" class="menu-section combo-section"> <!-- Раздел со спецпредложением -->
+        <div class="container"> <!-- Контейнер раздела -->
+            <h2 class="menu-title">Комбо недели</h2> <!-- Заголовок раздела -->
+            <div class="combo-card"> <!-- Карточка комбо-предложения -->
+                <div class="combo-info"> <!-- Текстовый блок комбо -->
+                    <p class="combo-name">Суп + горячее + напиток</p> <!-- Название комбо -->
+                    <p class="combo-details">Выберите любую комбинацию из меню — скидка 12% автоматически применится в корзине.</p> <!-- Описание комбо -->
+                </div> <!-- Завершаем текстовый блок -->
+                <button class="primary-button combo-button" type="button">Добавить всё в корзину</button> <!-- Кнопка добавления комбо -->
+            </div> <!-- Завершаем карточку комбо -->
+        </div> <!-- Завершаем контейнер раздела -->
+    </section> <!-- Завершаем раздел со спецпредложением -->
+</main> <!-- Завершаем основную часть страницы -->
+<footer class="site-footer"> <!-- Подвал сайта с контактной информацией -->
+    <div class="container footer-container"> <!-- Контейнер для выравнивания содержимого подвала -->
+        <p class="footer_text">Позвонить нам +7 800 000-00-00 • Москва, ул. Ланчей, 12</p> <!-- Контактный телефон и адрес компании -->
+    </div> <!-- Завершаем контейнер подвала -->
+</footer> <!-- Завершаем подвал сайта -->
+</body> <!-- Завершаем тело документа -->
+</html> <!-- Закрываем корневой элемент HTML -->
