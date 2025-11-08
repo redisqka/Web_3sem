@@ -1,443 +1,450 @@
-body { /* Базовые стили для всей страницы */
-    margin: 0; /* Убираем внешние отступы браузера по умолчанию */
-    font-family: 'Montserrat', sans-serif; /* Применяем основной шрифт Montserrat с запасным вариантом sans-serif */
-    font-size: 18px; /* Определяем базовый размер шрифта для текста */
-    line-height: 1.6; /* Настраиваем межстрочный интервал для удобочитаемости */
-    color: #2d2d2d; /* Устанавливаем основной цвет текста чуть темнее для контраста */
-    background-color: #f7f7f7; /* Добавляем светлый фон для всей страницы */
-} /* Завершаем блок стилей body */
-
-.page-body { /* Класс для flex-лейаута страницы */
-    display: flex; /* Включаем флекс-контейнер */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    min-height: 100vh; /* Обеспечиваем минимальную высоту во всю высоту окна */
-} /* Завершаем блок стилей .page-body */
-
-* { /* Универсальный селектор для всех элементов */
-    box-sizing: border-box; /* Пересчитываем размеры с учётом границ и внутренних отступов */
-} /* Завершаем блок универсального селектора */
-
-img { /* Базовые стили для изображений */
-    display: block; /* Убираем лишние отступы снизу у изображений */
-    max-width: 100%; /* Запрещаем выходить изображению за пределы контейнера */
-    height: auto; /* Поддерживаем пропорции изображения */
-} /* Завершаем блок стилей img */
-
-.container { /* Стили для обёртки контента */
-    width: 100%; /* Устанавливаем ширину контейнера на всю доступную область */
-    max-width: 1200px; /* Немного расширяем максимальную ширину для ровности сетки */
-    padding: 0 24px; /* Добавляем горизонтальные внутренние отступы */
-    margin: 0 auto; /* Центрируем контейнер относительно страницы */
-} /* Завершаем блок стилей .container */
-
-/* HEADER: оформление шапки сайта */
-.site-header { /* Стиль для элемента шапки */
-    background-color: #ffffff; /* Белый фон для визуального отделения шапки */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); /* Добавляем лёгкую тень для глубины */
-    position: sticky; /* Фиксируем шапку при скролле */
-    top: 0; /* Привязываем шапку к верхнему краю */
-    z-index: 100; /* Обеспечиваем отображение поверх других элементов */
-} /* Завершаем блок стилей .site-header */
-
-.header-container { /* Сетка для заголовка и меню */
-    display: flex; /* Включаем флекс-расположение */
-    align-items: center; /* Центрируем элементы по вертикали */
-    justify-content: space-between; /* Разносим элементы по краям */
-    gap: 32px; /* Добавляем промежуток между элементами */
-    padding: 20px 0; /* Устанавливаем вертикальные отступы */
-} /* Завершаем блок стилей .header-container */
-
-.header_text { /* Стили заголовка в шапке */
-    margin: 0; /* Убираем внешние отступы заголовка */
-    font-size: 30px; /* Увеличиваем размер шрифта заголовка */
-    font-weight: 800; /* Усиливаем насыщенность текста */
-} /* Завершаем блок стилей .header_text */
-
-.header_nav { /* Стили для блока навигации */
-    flex: 1; /* Разрешаем занимать доступное пространство */
-} /* Завершаем блок стилей .header_nav */
-
-.header_menu { /* Стили для списка в шапке */
-    display: flex; /* Используем флекс для управления сеткой меню */
-    flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
-    gap: 16px; /* Устанавливаем отступ между пунктами меню */
-    justify-content: flex-end; /* Выравниваем элементы по правому краю */
-    align-items: center; /* Центрируем элементы по вертикали */
-    list-style: none; /* Скрываем стандартные маркеры списка */
-    margin: 0; /* Убираем внешние отступы списка */
-    padding: 0; /* Убираем внутренние отступы */
-} /* Завершаем блок стилей .header_menu */
-
-.header_item { /* Стили для элементов списка меню */
-    display: flex; /* Устанавливаем flex для корректного позиционирования */
-} /* Завершаем блок стилей .header_item */
-
-.nav_link { /* Стили ссылок в навигационном меню */
-    color: #2d2d2d; /* Цвет текста ссылок в нормальном состоянии */
-    text-decoration: none; /* Убираем подчёркивание ссылок */
-    font-weight: 600; /* Делаем текст меню более выразительным */
-    padding: 10px 18px; /* Добавляем внутренние отступы для удобства клика */
-    border-radius: 12px; /* Скругляем углы для визуальной мягкости */
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Добавляем плавные эффекты при наведении */
-} /* Завершаем блок стилей .nav_link */
-
-.nav_link:hover { /* Состояние ссылок при наведении курсора */
-    color: tomato; /* Изменяем цвет текста для визуальной обратной связи */
-    background-color: rgba(255, 99, 71, 0.12); /* Добавляем полупрозрачный фон при наведении */
-} /* Завершаем блок hover для .nav_link */
-
-.nav_link.active { /* Стили для активного пункта меню */
-    color: tomato; /* Выделяем активную ссылку цветом */
-    font-weight: 700; /* Усиливаем жирность текста активной ссылки */
-    background-color: rgba(255, 99, 71, 0.08); /* Добавляем мягкий фон активному пункту */
-} /* Завершаем блок стилей .nav_link.active */
-
-/* LAYOUT: основная сетка главной страницы */
-.page-main { /* Стили для основного блока */
-    flex: 1; /* Позволяем основному контенту занимать свободное пространство */
-    display: flex; /* Включаем флекс для внутренних секций */
-    align-items: stretch; /* Растягиваем дочерние элементы по высоте */
-    padding: 48px 0; /* Добавляем вертикальные отступы */
-} /* Завершаем блок стилей .page-main */
-
-.layout-grid { /* Сетка с сайдбаром и контентом */
-    display: grid; /* Используем CSS Grid для ровного построения */
-    grid-template-columns: 280px minmax(0, 1fr); /* Задаём две колонки: фиксированную и гибкую */
-    gap: 32px; /* Устанавливаем расстояние между колонками */
-} /* Завершаем блок стилей .layout-grid */
-
-.sidebar { /* Стили боковой колонки */
-    background-color: #ffffff; /* Задаём белый фон */
-    border-radius: 24px; /* Скругляем углы блока */
-    padding: 28px; /* Добавляем внутренние отступы */
-    border: 1px solid rgba(45, 45, 45, 0.05); /* Добавляем тонкую границу */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.04); /* Используем лёгкую тень */
-    display: flex; /* Включаем флекс внутри боковой колонки */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 20px; /* Устанавливаем промежуток между элементами */
-} /* Завершаем блок стилей .sidebar */
-
-.sidebar_title { /* Стили заголовка боковой колонки */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 22px; /* Определяем размер шрифта */
-    font-weight: 700; /* Делаем заголовок насыщенным */
-} /* Завершаем блок стилей .sidebar_title */
-
-.sidebar_text { /* Стили для описательного текста */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 16px; /* Устанавливаем размер шрифта */
-    color: #4a4a4a; /* Используем более мягкий оттенок */
-} /* Завершаем блок стилей .sidebar_text */
-
-.sidebar_list { /* Стили для списка быстрых ссылок */
-    list-style: none; /* Убираем маркеры списка */
-    margin: 0; /* Убираем внешние отступы */
-    padding: 0; /* Убираем внутренние отступы */
-    display: flex; /* Используем флекс для списка */
-    flex-direction: column; /* Располагаем ссылки вертикально */
-    gap: 10px; /* Добавляем расстояние между ссылками */
-} /* Завершаем блок стилей .sidebar_list */
-
-.sidebar_item { /* Стили для элемента списка */
-    display: flex; /* Включаем флекс для корректного расположения */
-} /* Завершаем блок стилей .sidebar_item */
-
-.sidebar_link { /* Стили для ссылок в сайдбаре */
-    color: #2d2d2d; /* Основной цвет текста */
-    text-decoration: none; /* Убираем подчёркивание */
-    font-weight: 600; /* Делаем текст более выразительным */
-    padding-bottom: 4px; /* Добавляем небольшой внутренний отступ снизу */
-    border-bottom: 2px solid transparent; /* Подготавливаемся к эффекту наведения */
-    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out; /* Добавляем плавные переходы */
-} /* Завершаем блок стилей .sidebar_link */
-
-.sidebar_link:hover { /* Стили при наведении на ссылку в сайдбаре */
-    color: tomato; /* Изменяем цвет текста */
-    border-color: tomato; /* Подсвечиваем нижнюю границу */
-} /* Завершаем блок hover для .sidebar_link */
-
-.sidebar_banner { /* Стили для промо-блока */
-    background-color: rgba(255, 99, 71, 0.12); /* Используем полупрозрачный фон фирменного цвета */
-    border-radius: 18px; /* Скругляем углы блока */
-    padding: 18px; /* Устанавливаем внутренние отступы */
-} /* Завершаем блок стилей .sidebar_banner */
-
-.sidebar_banner-text { /* Стили текста промо-блока */
-    margin: 0; /* Убираем внешние отступы */
-    font-weight: 600; /* Делаем текст выразительным */
-} /* Завершаем блок стилей .sidebar_banner-text */
-
-.content { /* Стили основной колонки */
-    display: flex; /* Включаем флекс-расположение */
-    flex-direction: column; /* Располагаем секции вертикально */
-    gap: 32px; /* Добавляем расстояние между секциями */
-} /* Завершаем блок стилей .content */
-
-.content_section { /* Общие стили для секций контента */
-    background-color: #ffffff; /* Белый фон секции */
-    border-radius: 24px; /* Скругляем углы блока */
-    border: 1px solid rgba(45, 45, 45, 0.05); /* Добавляем тонкую границу */
-    box-shadow: 0 14px 24px rgba(0, 0, 0, 0.06); /* Используем мягкую тень */
-    overflow: hidden; /* Прячем выступающие элементы */
-} /* Завершаем блок стилей .content_section */
-
-.content_block { /* Стили для внутреннего контента секций */
-    padding: 32px; /* Добавляем внутренние отступы */
-} /* Завершаем блок стилей .content_block */
-
-.about_img { /* Стили для изображения в разделе "О нас" */
-    width: 100%; /* Позволяем изображению адаптироваться под ширину контейнера */
-    height: auto; /* Сохраняем пропорции изображения */
-} /* Завершаем блок стилей .about_img */
-
-h2 { /* Стили для заголовков второго уровня */
-    margin: 0 0 20px 0; /* Добавляем нижний отступ */
-    font-size: 30px; /* Увеличиваем размер шрифта заголовков */
-    text-transform: uppercase; /* Преобразуем текст заголовков в верхний регистр */
-    letter-spacing: 1px; /* Увеличиваем межбуквенное расстояние для выразительности */
-} /* Завершаем блок стилей h2 */
-
-p { /* Стили для параграфов */
-    margin: 0 0 16px 0; /* Добавляем нижний отступ для разделения абзацев */
-} /* Завершаем блок стилей p */
-
-.advantage_ul { /* Стили для списка преимуществ */
-    margin: 0; /* Убираем внешние отступы списка преимуществ */
-    padding-left: 20px; /* Добавляем отступ слева для маркеров списка */
-    display: flex; /* Используем флекс для распределения элементов */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 12px; /* Добавляем расстояние между элементами */
-} /* Завершаем блок стилей .advantage_ul */
-
-.advantage_li { /* Стили для отдельного преимущества */
-    font-weight: 500; /* Делаем текст немного более выразительным */
-} /* Завершаем блок стилей .advantage_li */
-
-/* TABLE: оформление таблицы рейтинга */
-.table_wrapper { /* Обёртка для таблицы рейтинга */
-    overflow-x: auto; /* Включаем горизонтальную прокрутку на маленьких экранах */
-} /* Завершаем блок стилей .table_wrapper */
-
-table { /* Стили для таблицы с рейтингом блюд */
-    width: 100%; /* Растягиваем таблицу на всю ширину контейнера */
-    border-collapse: collapse; /* Объединяем границы ячеек для аккуратного вида */
-    font-size: 18px; /* Устанавливаем размер шрифта в таблице */
-    background-color: #ffffff; /* Добавляем белый фон для контраста */
-} /* Завершаем блок стилей table */
-
-th, td { /* Стили для заголовков и ячеек таблицы */
-    border: 1px solid rgba(45, 45, 45, 0.08); /* Добавляем светлую границу вокруг ячеек */
-    padding: 14px 18px; /* Добавляем внутренние отступы в ячейках */
-    text-align: center; /* Центрируем текст внутри ячеек */
-} /* Завершаем блок стилей th, td */
-
-th { /* Стили для заголовков таблицы */
-    background-color: rgba(255, 99, 71, 0.12); /* Задаём фон с фирменным оттенком */
-    font-weight: 700; /* Делаем текст заголовков жирным */
-} /* Завершаем блок стилей th */
-
-td:first-child { /* Специальный стиль для первого столбца таблицы */
-    font-weight: 600; /* Выделяем номер блюда жирным шрифтом */
-} /* Завершаем блок стилей td:first-child */
-
-/* FORMS: оформление форм обратной связи и авторизации */
-.feedback-form { /* Общие стили формы обратной связи */
-    display: grid; /* Используем сетку для равномерных отступов */
-    gap: 20px; /* Добавляем расстояние между элементами формы */
-    background-color: #fafafa; /* Светлый фон для отделения формы от фона секции */
-    padding: 32px; /* Внутренние отступы формы */
-    border-radius: 20px; /* Скругляем углы формы */
-    border: 1px solid rgba(45, 45, 45, 0.05); /* Добавляем тонкую границу */
-} /* Завершаем блок стилей .feedback-form */
-
-.form-group { /* Стили для обёртки отдельных полей */
-    display: flex; /* Используем флекс для расположения элементов */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 8px; /* Задаём промежуток между подписью и полем */
-} /* Завершаем блок стилей .form-group */
-
-label { /* Общие стили для всех подписей */
-    font-weight: 600; /* Делаем подписи более заметными */
-} /* Завершаем блок стилей label */
-
-input[type="text"], /* Стили для текстовых полей */
-input[type="email"], /* Стили для поля Email */
-input[type="password"], /* Стили для поля пароля */
-input[type="file"], /* Стили для поля загрузки файла */
-select, /* Стили для селектов */
-textarea { /* Стили для многострочных полей */
-    padding: 12px 16px; /* Добавляем внутренние отступы для удобства ввода */
-    border: 1px solid rgba(45, 45, 45, 0.15); /* Устанавливаем нейтральную границу */
-    border-radius: 12px; /* Скругляем углы полей ввода */
-    font-size: 16px; /* Подгоняем размер шрифта */
-    background-color: #ffffff; /* Используем белый фон полей */
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Добавляем плавное изменение границы и тени */
-} /* Завершаем блок стилей для полей ввода */
-
-input[type="text"]:focus, /* Стили при фокусе для текстовых полей */
-input[type="email"]:focus, /* Стили при фокусе для Email */
-input[type="password"]:focus, /* Стили при фокусе для пароля */
-input[type="file"]:focus, /* Стили при фокусе для загрузки файла */
-select:focus, /* Стили при фокусе для селектов */
-textarea:focus { /* Стили при фокусе для textarea */
-    border-color: tomato; /* Подсвечиваем границу фирменным цветом */
-    box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.2); /* Добавляем мягкую подсветку вокруг поля */
-    outline: none; /* Убираем стандартный контур браузера */
-} /* Завершаем блок стилей фокуса */
-
-textarea { /* Дополнительные стили для многострочного поля */
-    resize: vertical; /* Позволяем пользователю изменять высоту поля */
-    min-height: 140px; /* Устанавливаем минимальную высоту для удобства */
-} /* Завершаем блок стилей textarea */
-
-fieldset { /* Стили для группировки радиокнопок */
-    border: 1px solid rgba(45, 45, 45, 0.12); /* Добавляем рамку вокруг группы */
-    border-radius: 16px; /* Скругляем углы контейнера радиокнопок */
-    padding: 16px 24px; /* Внутренние отступы для удобства чтения */
-    display: grid; /* Используем сетку для равномерного расположения */
-    gap: 12px; /* Добавляем промежуток между вариантами */
-} /* Завершаем блок стилей fieldset */
-
-legend { /* Стили для заголовка группы радиокнопок */
-    font-weight: 700; /* Выделяем текст легенды */
-    padding: 0 8px; /* Добавляем горизонтальные отступы для отделения от границы */
-} /* Завершаем блок стилей legend */
-
-.radio-option { /* Стили для отдельного варианта радиокнопки */
-    display: flex; /* Используем флекс для выравнивания элементов */
-    align-items: center; /* Центрируем элементы по вертикали */
-    gap: 10px; /* Добавляем расстояние между радиокнопкой и текстом */
-    font-weight: 500; /* Делаем подписи к вариантам немного выразительнее */
-} /* Завершаем блок стилей .radio-option */
-
-.checkbox-option { /* Стили для обёрток чекбоксов */
-    display: flex; /* Используем флекс для построения горизонтально */
-    align-items: center; /* Центрируем элементы по вертикали */
-    gap: 10px; /* Добавляем расстояние между чекбоксом и текстом */
-    font-weight: 500; /* Делаем подписи заметнее */
-} /* Завершаем блок стилей .checkbox-option */
-
-.primary-button { /* Стили для основных кнопок */
-    padding: 14px 28px; /* Добавляем внутренние отступы для удобного нажатия */
-    border: none; /* Убираем стандартную границу кнопки */
-    border-radius: 16px; /* Скругляем углы кнопки */
-    background-color: tomato; /* Используем единый фирменный цвет */
-    color: #ffffff; /* Устанавливаем белый цвет текста */
-    font-size: 18px; /* Увеличиваем размер шрифта кнопки */
-    font-weight: 700; /* Делаем текст жирным для акцента */
-    cursor: pointer; /* Меняем курсор на руку при наведении */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease; /* Настраиваем плавные эффекты при взаимодействии */
-    text-align: center; /* Центрируем текст в кнопке */
-    display: inline-flex; /* Используем флекс для выравнивания текста */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    align-items: center; /* Центрируем содержимое по вертикали */
-} /* Завершаем блок стилей .primary-button */
-
-.primary-button:hover { /* Стили для кнопки при наведении */
-    transform: translateY(-2px); /* Поднимаем кнопку для эффекта отклика */
-    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.28); /* Усиливаем тень при наведении */
-    filter: brightness(1.05); /* Легко подсвечиваем кнопку */
-} /* Завершаем блок hover для кнопки */
-
-.primary-button:active { /* Стили для кнопки при нажатии */
-    transform: translateY(0); /* Возвращаем кнопку на место */
-    box-shadow: 0 6px 12px rgba(255, 99, 71, 0.2); /* Ослабляем тень для имитации нажатия */
-    filter: brightness(0.95); /* Немного притемняем кнопку */
-} /* Завершаем блок active для кнопки */
-
-/* AUTH FORM: оформление секции авторизации */
-.auth-section { /* Стили для секции с формой авторизации */
-    min-height: 100vh; /* Растягиваем секцию на всю высоту окна */
-    background-image: url('images/auth-bg.svg'); /* Устанавливаем фоновое изображение */
-    background-size: cover; /* Растягиваем фон по размеру секции */
-    background-position: center; /* Центрируем фоновое изображение */
-    display: flex; /* Используем флекс для центрирования содержимого */
-    align-items: center; /* Центрируем содержимое по вертикали */
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    padding: 40px 20px; /* Добавляем внутренние отступы по краям */
-} /* Завершаем блок стилей .auth-section */
-
-.auth-overlay { /* Стили для подложки под форму авторизации */
-    background-color: rgba(255, 255, 255, 0.86); /* Добавляем светлый полупрозрачный фон для читаемости */
-    backdrop-filter: blur(4px); /* Размываем фон для более мягкого вида */
-    padding: 40px; /* Устанавливаем внутренние отступы */
-    border-radius: 24px; /* Скругляем углы подложки */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18); /* Добавляем глубокую тень */
-    max-width: 420px; /* Ограничиваем максимальную ширину блока авторизации */
-    width: 100%; /* Позволяем блоку адаптироваться на меньших экранах */
-    border: 1px solid rgba(255, 255, 255, 0.6); /* Добавляем мягкую светлую границу */
-} /* Завершаем блок стилей .auth-overlay */
-
-.auth-form { /* Стили для формы авторизации */
-    display: grid; /* Используем сетку для вертикальных отступов */
-    gap: 20px; /* Устанавливаем расстояние между элементами формы */
-} /* Завершаем блок стилей .auth-form */
-
-.auth-title { /* Стили для заголовка формы авторизации */
-    margin: 0; /* Убираем внешние отступы по умолчанию */
-    text-align: center; /* Центрируем текст заголовка */
-    font-size: 28px; /* Увеличиваем размер шрифта заголовка */
-    color: #1f1f1f; /* Устанавливаем насыщенный цвет текста */
-} /* Завершаем блок стилей .auth-title */
-
-/* FOOTER: оформление подвала */
-.site-footer { /* Стили для подвала сайта */
-    background-color: #1c1c1c; /* Устанавливаем тёмный фон подвала */
-    color: #ffffff; /* Используем белый цвет текста для контраста */
-    font-size: 18px; /* Определяем размер шрифта в подвале */
-    text-align: center; /* Центрируем текст в подвале */
-    padding: 24px; /* Добавляем внутренние отступы */
-    margin-top: auto; /* Прижимаем подвал к низу при недостатке контента */
-} /* Завершаем блок стилей .site-footer */
-
-.footer_text { /* Стили для текста в подвале */
-    margin: 0; /* Убираем внешние отступы */
-} /* Завершаем блок стилей .footer_text */
-
-/* RESPONSIVE: адаптация под различные экраны */
-@media (max-width: 1080px) { /* Медиа-запрос для экранов до 1080px */
-    .layout-grid { /* Корректировка сетки с сайдбаром */
-        grid-template-columns: 1fr; /* Переключаемся на одну колонку */
-    } /* Завершаем блок .layout-grid в медиазапросе */
-
-    .sidebar { /* Корректировка сайдбара */
-        order: 2; /* Перемещаем сайдбар вниз */
-    } /* Завершаем блок .sidebar в медиазапросе */
-
-    .content { /* Корректировка контента */
-        order: 1; /* Размещаем основной контент выше */
-    } /* Завершаем блок .content в медиазапросе */
-
-    .header-container { /* Корректировка шапки */
-        flex-direction: column; /* Переключаемся на вертикальное расположение */
-        align-items: flex-start; /* Выравниваем элементы по левому краю */
-    } /* Завершаем блок .header-container в медиазапросе */
-
-    .header_menu { /* Корректировка меню */
-        justify-content: flex-start; /* Выравниваем элементы по левому краю */
-    } /* Завершаем блок .header_menu в медиазапросе */
+/* Базовые стили для всей страницы */
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #2d2d2d;
+    background-color: #f7f7f7;
 }
 
-@media (max-width: 720px) { /* Медиа-запрос для экранов до 720px */
-    .content_block { /* Корректировка внутренних отступов секций */
-        padding: 24px; /* Снижаем внутренние отступы */
-    } /* Завершаем блок .content_block в медиазапросе */
-
-    th, td { /* Корректировка таблицы */
-        padding: 12px; /* Снижаем внутренние отступы */
-    } /* Завершаем блок th, td в медиазапросе */
+/* Flex-лейаут страницы */
+.page-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-@media (max-width: 480px) { /* Медиа-запрос для экранов до 480px */
-    .header_text { /* Корректировка заголовка */
-        font-size: 24px; /* Уменьшаем размер шрифта */
-    } /* Завершаем блок .header_text в медиазапросе */
+* {
+    box-sizing: border-box;
+}
 
-    .nav_link { /* Корректировка ссылок меню */
-        padding: 8px 14px; /* Уменьшаем отступы */
-    } /* Завершаем блок .nav_link в медиазапросе */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
-    table { /* Корректировка таблицы */
-        font-size: 16px; /* Уменьшаем размер шрифта таблицы */
-    } /* Завершаем блок table в медиазапросе */
+/* Обёртка контента */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+    margin: 0 auto;
+}
+
+/* Шапка сайта */
+.site-header {
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 20px 0;
+}
+
+.header_text {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.header_nav {
+    flex: 1;
+}
+
+.header_menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header_item {
+    display: flex;
+}
+
+.nav_link {
+    color: #2d2d2d;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 12px;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.nav_link:hover {
+    color: tomato;
+    background-color: rgba(255, 99, 71, 0.12);
+}
+
+.nav_link.active {
+    color: tomato;
+    font-weight: 700;
+    background-color: rgba(255, 99, 71, 0.08);
+}
+
+/* Основная сетка главной страницы */
+.page-main {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    padding: 48px 0;
+}
+
+/* Сетка с сайдбаром и контентом */
+.layout-grid {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 32px;
+}
+
+/* Боковая колонка */
+.sidebar {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid rgba(45, 45, 45, 0.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar_title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.sidebar_text {
+    margin: 0;
+    font-size: 16px;
+    color: #4a4a4a;
+}
+
+.sidebar_list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar_item {
+    display: flex;
+}
+
+.sidebar_link {
+    color: #2d2d2d;
+    text-decoration: none;
+    font-weight: 600;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.sidebar_link:hover {
+    color: tomato;
+    border-color: tomato;
+}
+
+.sidebar_banner {
+    background-color: rgba(255, 99, 71, 0.12);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.sidebar_banner-text {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Основная колонка */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.content_section {
+    background-color: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(45, 45, 45, 0.05);
+    box-shadow: 0 14px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.content_block {
+    padding: 32px;
+}
+
+.about_img {
+    width: 100%;
+    height: auto;
+}
+
+h2 {
+    margin: 0 0 20px 0;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+p {
+    margin: 0 0 16px 0;
+}
+
+.advantage_ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.advantage_li {
+    font-weight: 500;
+}
+
+/* Таблица рейтинга */
+.table_wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+    background-color: #ffffff;
+}
+
+th, td {
+    border: 1px solid rgba(45, 45, 45, 0.08);
+    padding: 14px 18px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(255, 99, 71, 0.12);
+    font-weight: 700;
+}
+
+td:first-child {
+    font-weight: 600;
+}
+
+/* Формы обратной связи */
+.feedback-form {
+    display: grid;
+    gap: 20px;
+    background-color: #fafafa;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(45, 45, 45, 0.05);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+select,
+textarea {
+    padding: 12px 16px;
+    border: 1px solid rgba(45, 45, 45, 0.15);
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus {
+    border-color: tomato;
+    box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.2);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+fieldset {
+    border: 1px solid rgba(45, 45, 45, 0.12);
+    border-radius: 16px;
+    padding: 16px 24px;
+    display: grid;
+    gap: 12px;
+}
+
+legend {
+    font-weight: 700;
+    padding: 0 8px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+/* Основные кнопки */
+.primary-button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 16px;
+    background-color: tomato;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.28);
+    filter: brightness(1.05);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 12px rgba(255, 99, 71, 0.2);
+    filter: brightness(0.95);
+}
+
+/* Секция авторизации */
+.auth-section {
+    min-height: 100vh;
+    background-image: url('images/auth-bg.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-overlay {
+    background-color: rgba(255, 255, 255, 0.86);
+    backdrop-filter: blur(4px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.auth-form {
+    display: grid;
+    gap: 20px;
+}
+
+.auth-title {
+    margin: 0;
+    text-align: center;
+    font-size: 28px;
+    color: #1f1f1f;
+}
+
+/* Подвал сайта */
+.site-footer {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    padding: 24px;
+    margin-top: auto;
+}
+
+.footer_text {
+    margin: 0;
+}
+
+/* Адаптация под различные экраны */
+@media (max-width: 1080px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .content {
+        order: 1;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header_menu {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 720px) {
+    .content_block {
+        padding: 24px;
+    }
+
+    th, td {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header_text {
+        font-size: 24px;
+    }
+
+    .nav_link {
+        padding: 8px 14px;
+    }
+
+    table {
+        font-size: 16px;
+    }
 }

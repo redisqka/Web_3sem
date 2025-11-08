@@ -1,196 +1,164 @@
-<!DOCTYPE html> <!-- Объявляем документ в формате HTML5 -->
-<html lang="ru"> <!-- Указываем, что основной язык страницы русский -->
-<head> <!-- Начинаем раздел с метаданными и подключениями -->
-    <meta charset="UTF-8"> <!-- Задаём кодировку символов UTF-8 для корректного отображения текста -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Устанавливаем корректное масштабирование для адаптивности -->
-    <!-- Предзагрузка шрифтов: готовим браузер к загрузке ресурсов Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Создаём предварительное соединение с доменом, где лежат стили шрифтов -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Открываем предварительное соединение к домену со статическими файлами шрифтов с поддержкой кросс-доменных запросов -->
-    <!-- Подключение шрифта: загружаем гарнитуру Montserrat со всеми вариациями -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> <!-- Подключаем CSS с нужным шрифтом -->
-    <!-- Подключение основных стилей: используем единый файл для сайта -->
-    <link rel="stylesheet" href="./style.css"> <!-- Подключаем локальные стили проекта -->
-    <!-- Подключение стилей для печати: создаём отдельный файл с правилами -->
-    <link rel="stylesheet" href="./print.css" media="print"> <!-- Подключаем таблицу стилей, применяемую только при печати -->
-    <title>Food Construct</title> <!-- Заголовок вкладки браузера -->
-</head> <!-- Завершаем раздел метаданных -->
-<body class="page-body"> <!-- Начинаем основное тело документа и задаём класс для flex-лейаута -->
-<header class="site-header"> <!-- Шапка сайта с логотипом и меню -->
-    <div class="container header-container"> <!-- Контейнер для выравнивания контента шапки -->
-        <h1 class="header_text">Food Construct</h1> <!-- Главный заголовок сайта с классом для стилизации -->
-        <nav class="header_nav"> <!-- Блок навигации по разделам и страницам -->
-            <ul class="header_menu"> <!-- Флекс-меню с пунктами навигации -->
-                <li class="header_item"><a class="nav_link active" href="./index.html">Главная</a></li> <!-- Ссылка на текущую страницу с выделением активного пункта -->
-                <li class="header_item"><a class="nav_link" href="./lunch.html">Собрать ланч</a></li> <!-- Перекрёстная ссылка на страницу конструктора ланча -->
-                <li class="header_item"><a class="nav_link" href="#about">О нас</a></li> <!-- Переход к разделу с информацией о компании -->
-                <li class="header_item"><a class="nav_link" href="#advantage">Преимущества</a></li> <!-- Переход к описанию преимуществ сервиса -->
-                <li class="header_item"><a class="nav_link" href="#rating">Популярные блюда</a></li> <!-- Переход к таблице рейтинга -->
-                <li class="header_item"><a class="nav_link" href="#feedback">Обратная связь</a></li> <!-- Переход к форме обратной связи -->
-                <li class="header_item"><a class="nav_link" href="#auth">Войти</a></li> <!-- Переход к форме аутентификации -->
-            </ul> <!-- Завершаем список элементов меню -->
-        </nav> <!-- Закрываем блок навигации -->
-    </div> <!-- Завершаем контейнер шапки -->
-</header> <!-- Завершаем шапку страницы -->
-<main class="page-main"> <!-- Основная содержательная часть сайта -->
-    <div class="container layout-grid"> <!-- Контейнер с флекс-сеткой для основной части и сайдбара -->
-        <aside class="sidebar"> <!-- Боковая колонка с дополнительной информацией -->
-            <h2 class="sidebar_title">Ланч-день</h2> <!-- Заголовок боковой колонки -->
-            <p class="sidebar_text">Каждый вторник и четверг мы добавляем блюда недели со скидкой 15%.</p> <!-- Текст с дополнительной информацией -->
-            <ul class="sidebar_list"> <!-- Список быстрых ссылок по разделам -->
-                <li class="sidebar_item"><a class="sidebar_link" href="#feedback">Обратная связь</a></li> <!-- Быстрая ссылка на форму связи -->
-                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#soups">Супы недели</a></li> <!-- Ссылка на раздел супов на странице ланчей -->
-                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#mains">Горячие блюда</a></li> <!-- Ссылка на раздел основных блюд -->
-                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#drinks">Напитки</a></li> <!-- Ссылка на раздел напитков -->
-            </ul> <!-- Завершаем список быстрых ссылок -->
-            <div class="sidebar_banner"> <!-- Промо-блок в боковой колонке -->
-                <p class="sidebar_banner-text">Дарим десерт из меню недели при первом заказе</p> <!-- Текст промо-предложения -->
-            </div> <!-- Завершаем промо-блок -->
-        </aside> <!-- Завершаем боковую колонку -->
-        <section class="content"> <!-- Основная колонка с контентом -->
-            <section id="about" class="content_section"> <!-- Раздел с описанием компании -->
-                <img class="about_img" src="images/about.jpg" alt="Фото ланча"> <!-- Изображение ланча с альтернативным описанием -->
-                <div class="content_block"> <!-- Обёртка текста для настройки отступов -->
-                    <h2>О нас</h2> <!-- Заголовок второго уровня для раздела "О нас" -->
-                    <p>Food Construct доставляет бизнес-ланчи по всей Москве: мы привезём горячие блюда к назначенному времени и соберём меню под ваши предпочтения.</p> <!-- Описание сервиса с указанием его преимуществ -->
-                </div> <!-- Завершаем текстовую обёртку раздела "О нас" -->
-            </section> <!-- Закрываем раздел с информацией о компании -->
-            <section id="advantage" class="content_section"> <!-- Раздел, рассказывающий о преимуществах сервиса -->
-                <div class="content_block"> <!-- Обёртка раздела для отступов -->
-                    <h2>Преимущество Food Construct</h2> <!-- Заголовок второго уровня для блока преимуществ -->
-                    <ul class="advantage_ul"> <!-- Ненумерованный список преимуществ с кастомным оформлением -->
-                        <li class="advantage_li">Привозим вовремя и без опозданий</li> <!-- Преимущество: пунктуальная доставка -->
-                        <li class="advantage_li">Надёжно упаковываем блюда в удобные контейнеры бесплатно</li> <!-- Преимущество: бесплатная и качественная упаковка -->
-                        <li class="advantage_li">Доставляем ланчи весь день с 7:00 до 23:00</li> <!-- Преимущество: длительный график доставки -->
-                    </ul> <!-- Завершаем список преимуществ -->
-                </div> <!-- Завершаем обёртку раздела преимуществ -->
-            </section> <!-- Завершаем раздел с преимуществами -->
-            <section id="rating" class="content_section"> <!-- Раздел с таблицей популярных блюд -->
-                <div class="content_block"> <!-- Обёртка для таблицы рейтинга -->
-                    <h2>Топ-5 популярных блюд</h2> <!-- Заголовок второго уровня для рейтинга блюд -->
-                    <div class="table_wrapper"> <!-- Обёртка для таблицы с горизонтальной прокруткой на малых экранах -->
-                        <table> <!-- Таблица с данными о блюдах -->
-                            <thead> <!-- Заголовок таблицы -->
-                                <tr> <!-- Строка заголовков таблицы -->
-                                    <th>№</th> <!-- Заголовок столбца с порядковым номером -->
-                                    <th>Название</th> <!-- Заголовок столбца с названием блюда -->
-                                    <th>Кол-во заказов в неделю</th> <!-- Заголовок столбца с количеством заказов за неделю -->
-                                    <th>Цена</th> <!-- Заголовок столбца с ценой блюда -->
-                                </tr> <!-- Завершаем строку заголовков -->
-                            </thead> <!-- Завершаем заголовок таблицы -->
-                            <tbody> <!-- Тело таблицы -->
-                                <tr> <!-- Первая строка с данными -->
-                                    <td>1</td> <!-- Порядковый номер блюда в рейтинге -->
-                                    <td>Лазанья</td> <!-- Название блюда -->
-                                    <td>185</td> <!-- Количество заказов за неделю -->
-                                    <td>385₽</td> <!-- Стоимость блюда -->
-                                </tr> <!-- Завершаем первую строку данных -->
-                                <tr> <!-- Вторая строка таблицы -->
-                                    <td>2</td> <!-- Порядковый номер второго блюда -->
-                                    <td>Том Ям с креветками</td> <!-- Название второго блюда -->
-                                    <td>161</td> <!-- Количество заказов второго блюда -->
-                                    <td>365₽</td> <!-- Цена второго блюда -->
-                                </tr> <!-- Завершаем вторую строку данных -->
-                                <tr> <!-- Третья строка таблицы -->
-                                    <td>3</td> <!-- Порядковый номер третьего блюда -->
-                                    <td>Норвежский суп</td> <!-- Название третьего блюда -->
-                                    <td>144</td> <!-- Количество заказов третьего блюда -->
-                                    <td>270₽</td> <!-- Цена третьего блюда -->
-                                </tr> <!-- Завершаем третью строку данных -->
-                                <tr> <!-- Четвёртая строка таблицы -->
-                                    <td>4</td> <!-- Порядковый номер четвертого блюда -->
-                                    <td>Жареная картошка с грибами</td> <!-- Название четвертого блюда -->
-                                    <td>132</td> <!-- Количество заказов четвертого блюда -->
-                                    <td>150₽</td> <!-- Цена четвертого блюда -->
-                                </tr> <!-- Завершаем четвертую строку данных -->
-                                <tr> <!-- Пятая строка таблицы -->
-                                    <td>5</td> <!-- Порядковый номер пятого блюда -->
-                                    <td>Котлеты из курицы с картофельным пюре</td> <!-- Название пятого блюда -->
-                                    <td>128</td> <!-- Количество заказов пятого блюда -->
-                                    <td>225₽</td> <!-- Цена пятого блюда -->
-                                </tr> <!-- Завершаем пятую строку данных -->
-                            </tbody> <!-- Завершаем тело таблицы -->
-                        </table> <!-- Завершаем таблицу рейтинга блюд -->
-                    </div> <!-- Завершаем обёртку таблицы -->
-                </div> <!-- Закрываем обёртку раздела с рейтингом -->
-            </section> <!-- Завершаем раздел с таблицей -->
-            <section id="feedback" class="content_section"> <!-- Раздел с формой обратной связи -->
-                <div class="content_block"> <!-- Обёртка для формы -->
-                    <h2>Обратная связь</h2> <!-- Заголовок раздела обратной связи -->
-                    <form class="feedback-form" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data"> <!-- Форма обратной связи, отправляющая данные методом POST для поддержки файлов -->
-                        <div class="form-group"> <!-- Группа полей для ввода ФИО -->
-                            <label for="fullName">ФИО</label> <!-- Подпись к полю ФИО -->
-                            <input id="fullName" name="fullName" type="text" placeholder="Иванов Иван Иванович" required> <!-- Текстовое поле для ввода ФИО с плейсхолдером и обязательным заполнением -->
-                        </div> <!-- Завершаем группу полей ФИО -->
-                        <div class="form-group"> <!-- Группа для ввода Email -->
-                            <label for="email">Email</label> <!-- Подпись к полю Email -->
-                            <input id="email" name="email" type="email" placeholder="name@example.com" required> <!-- Поле для ввода Email с проверкой формата -->
-                        </div> <!-- Завершаем группу Email -->
-                        <fieldset class="form-group"> <!-- Группа радиокнопок с легендой -->
-                            <legend>Откуда вы узнали о нас?</legend> <!-- Заголовок для группы радиокнопок -->
-                            <label class="radio-option"> <!-- Обёртка для первой радиокнопки -->
-                                <input type="radio" name="source" value="social" required> <!-- Радиокнопка с вариантом "Социальные сети" -->
-                                Социальные сети <!-- Текстовое описание первого варианта -->
-                            </label> <!-- Завершаем обёртку первого варианта -->
-                            <label class="radio-option"> <!-- Обёртка для второй радиокнопки -->
-                                <input type="radio" name="source" value="friends"> <!-- Радиокнопка с вариантом "Друзья" -->
-                                Рекомендация друзей <!-- Текстовое описание второго варианта -->
-                            </label> <!-- Завершаем обёртку второго варианта -->
-                            <label class="radio-option"> <!-- Обёртка для третьей радиокнопки -->
-                                <input type="radio" name="source" value="ads"> <!-- Радиокнопка с вариантом "Реклама" -->
-                                Рекламные материалы <!-- Текстовое описание третьего варианта -->
-                            </label> <!-- Завершаем обёртку третьего варианта -->
-                        </fieldset> <!-- Завершаем поле набора радиокнопок -->
-                        <div class="form-group"> <!-- Группа для выбора типа обращения -->
-                            <label for="appealType">Тип обращения</label> <!-- Подпись к селектору -->
-                            <select id="appealType" name="appealType" required> <!-- Выпадающий список с обязательным выбором -->
-                                <option value="">Выберите вариант</option> <!-- Подсказка при отсутствии выбора -->
-                                <option value="complaint">Жалоба</option> <!-- Вариант жалобы -->
-                                <option value="suggestion">Предложение</option> <!-- Вариант предложения -->
-                            </select> <!-- Завершаем выпадающий список -->
-                        </div> <!-- Завершаем группу селектора -->
-                        <div class="form-group"> <!-- Группа для textarea с текстом сообщения -->
-                            <label for="message">Текст сообщения</label> <!-- Подпись к текстовому полю -->
-                            <textarea id="message" name="message" rows="5" placeholder="Опишите вашу ситуацию или предложение" required></textarea> <!-- Многострочное поле для ввода сообщения с плейсхолдером и обязательным заполнением -->
-                        </div> <!-- Завершаем группу textarea -->
-                        <div class="form-group"> <!-- Группа для прикрепления файла -->
-                            <label for="attachment">Вложения</label> <!-- Подпись к полю выбора файла -->
-                            <input id="attachment" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png"> <!-- Поле для загрузки файла с ограничением форматов -->
-                        </div> <!-- Завершаем группу с файлом -->
-                        <label class="checkbox-option"> <!-- Обёртка для чекбокса согласия -->
-                            <input type="checkbox" name="consent" required> <!-- Чекбокс подтверждения согласия с обязательным выбором -->
-                            Даю согласие на обработку персональных данных <!-- Текстовое описание согласия -->
-                        </label> <!-- Завершаем обёртку чекбокса согласия -->
-                        <button type="submit" class="primary-button">Отправить</button> <!-- Кнопка отправки формы -->
-                    </form> <!-- Завершаем форму обратной связи -->
-                </div> <!-- Закрываем обёртку формы -->
-            </section> <!-- Завершение раздела обратной связи -->
-        </section> <!-- Завершаем основную колонку с контентом -->
-    </div> <!-- Закрываем контейнер с сеткой -->
-</main> <!-- Завершаем основную часть страницы -->
-<section id="auth" class="auth-section"> <!-- Раздел с формой аутентификации и фоновым изображением -->
-    <div class="auth-overlay"> <!-- Полупрозрачная подложка поверх фонового изображения -->
-        <form class="auth-form" action="https://httpbin.org/post" method="POST"> <!-- Форма авторизации, отправляющая данные методом POST -->
-            <h2 class="auth-title">Вход в личный кабинет</h2> <!-- Заголовок формы входа -->
-            <div class="form-group"> <!-- Группа для ввода логина -->
-                <label for="login">Логин</label> <!-- Подпись к полю логина -->
-                <input id="login" name="login" type="text" placeholder="Введите логин" required> <!-- Поле ввода логина с подсказкой и обязательным заполнением -->
-            </div> <!-- Завершаем группу логина -->
-            <div class="form-group"> <!-- Группа для ввода пароля -->
-                <label for="password">Пароль</label> <!-- Подпись к полю пароля -->
-                <input id="password" name="password" type="password" placeholder="Введите пароль" required> <!-- Поле ввода пароля скрывающего типа -->
-            </div> <!-- Завершаем группу пароля -->
-            <label class="checkbox-option"> <!-- Обёртка для чекбокса запоминания -->
-                <input type="checkbox" name="remember"> <!-- Чекбокс "Запомнить меня" -->
-                Запомнить меня <!-- Текстовое описание чекбокса -->
-            </label> <!-- Завершаем обёртку чекбокса запоминания -->
-            <button type="submit" class="primary-button">Войти</button> <!-- Кнопка отправки формы авторизации -->
-        </form> <!-- Завершаем форму авторизации -->
-    </div> <!-- Завершаем подложку под форму -->
-</section> <!-- Завершаем раздел авторизации -->
-<footer id="footer" class="site-footer"> <!-- Подвал сайта с контактной информацией -->
-    <div class="container footer-container"> <!-- Контейнер для выравнивания содержимого подвала -->
-        <p class="footer_text">Позвонить нам +7 800 000-00-00 • Москва, ул. Ланчей, 12</p> <!-- Контактный телефон и адрес компании -->
-    </div> <!-- Завершаем контейнер подвала -->
-</footer> <!-- Завершаем подвал сайта -->
-</body> <!-- Завершаем тело документа -->
-</html> <!-- Закрываем корневой элемент HTML -->
+<!DOCTYPE html> <!-- Документ HTML5 -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Шрифты и стили -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./print.css" media="print">
+    <title>Food Construct</title>
+</head>
+<body class="page-body">
+<header class="site-header"> <!-- Шапка сайта -->
+    <div class="container header-container">
+        <h1 class="header_text">Food Construct</h1>
+        <nav class="header_nav">
+            <ul class="header_menu">
+                <li class="header_item"><a class="nav_link active" href="./index.html">Главная</a></li>
+                <li class="header_item"><a class="nav_link" href="./lunch.html">Собрать ланч</a></li>
+                <li class="header_item"><a class="nav_link" href="#about">О нас</a></li>
+                <li class="header_item"><a class="nav_link" href="#advantage">Преимущества</a></li>
+                <li class="header_item"><a class="nav_link" href="#rating">Популярные блюда</a></li>
+                <li class="header_item"><a class="nav_link" href="#feedback">Обратная связь</a></li>
+                <li class="header_item"><a class="nav_link" href="#auth">Войти</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="page-main">
+    <div class="container layout-grid">
+        <aside class="sidebar"> <!-- Боковая колонка -->
+            <h2 class="sidebar_title">Ланч-день</h2>
+            <p class="sidebar_text">Каждый вторник и четверг мы добавляем блюда недели со скидкой 15%.</p>
+            <ul class="sidebar_list">
+                <li class="sidebar_item"><a class="sidebar_link" href="#feedback">Обратная связь</a></li>
+                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#soups">Супы недели</a></li>
+                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#mains">Горячие блюда</a></li>
+                <li class="sidebar_item"><a class="sidebar_link" href="./lunch.html#drinks">Напитки</a></li>
+            </ul>
+            <div class="sidebar_banner">
+                <p class="sidebar_banner-text">Дарим десерт при первом заказе</p>
+            </div>
+        </aside>
+
+        <section class="content">
+            <section id="about" class="content_section"> <!-- Раздел "О нас" -->
+                <img class="about_img" src="images/about.jpg" alt="Фото ланча">
+                <div class="content_block">
+                    <h2>О нас</h2>
+                    <p>Food Construct доставляет бизнес-ланчи по всей Москве: горячие блюда к назначенному времени и меню под ваши предпочтения.</p>
+                </div>
+            </section>
+
+            <section id="advantage" class="content_section"> <!-- Преимущества -->
+                <div class="content_block">
+                    <h2>Преимущества Food Construct</h2>
+                    <ul class="advantage_ul">
+                        <li class="advantage_li">Привозим вовремя</li>
+                        <li class="advantage_li">Бесплатная упаковка</li>
+                        <li class="advantage_li">Работаем с 7:00 до 23:00</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="rating" class="content_section"> <!-- Топ-5 блюд -->
+                <div class="content_block">
+                    <h2>Топ-5 популярных блюд</h2>
+                    <div class="table_wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>Название</th>
+                                    <th>Кол-во заказов</th>
+                                    <th>Цена</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Лазанья</td><td>185</td><td>385₽</td></tr>
+                                <tr><td>2</td><td>Том Ям с креветками</td><td>161</td><td>365₽</td></tr>
+                                <tr><td>3</td><td>Норвежский суп</td><td>144</td><td>270₽</td></tr>
+                                <tr><td>4</td><td>Жареная картошка с грибами</td><td>132</td><td>150₽</td></tr>
+                                <tr><td>5</td><td>Котлеты с пюре</td><td>128</td><td>225₽</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="feedback" class="content_section"> <!-- Обратная связь -->
+                <div class="content_block">
+                    <h2>Обратная связь</h2>
+                    <form class="feedback-form" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="fullName">ФИО</label>
+                            <input id="fullName" name="fullName" type="text" placeholder="Иванов Иван Иванович" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="name@example.com" required>
+                        </div>
+                        <fieldset class="form-group">
+                            <legend>Откуда вы узнали о нас?</legend>
+                            <label class="radio-option"><input type="radio" name="source" value="social" required> Соцсети</label>
+                            <label class="radio-option"><input type="radio" name="source" value="friends"> Друзья</label>
+                            <label class="radio-option"><input type="radio" name="source" value="ads"> Реклама</label>
+                        </fieldset>
+                        <div class="form-group">
+                            <label for="appealType">Тип обращения</label>
+                            <select id="appealType" name="appealType" required>
+                                <option value="">Выберите вариант</option>
+                                <option value="complaint">Жалоба</option>
+                                <option value="suggestion">Предложение</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Текст сообщения</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Опишите вашу ситуацию" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="attachment">Вложения</label>
+                            <input id="attachment" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="consent" required> Даю согласие на обработку данных
+                        </label>
+                        <button type="submit" class="primary-button">Отправить</button>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </div>
+</main>
+
+<section id="auth" class="auth-section"> <!-- Вход -->
+    <div class="auth-overlay">
+        <form class="auth-form" action="https://httpbin.org/post" method="POST">
+            <h2 class="auth-title">Вход в личный кабинет</h2>
+            <div class="form-group">
+                <label for="login">Логин</label>
+                <input id="login" name="login" type="text" placeholder="Введите логин" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input id="password" name="password" type="password" placeholder="Введите пароль" required>
+            </div>
+            <label class="checkbox-option">
+                <input type="checkbox" name="remember"> Запомнить меня
+            </label>
+            <button type="submit" class="primary-button">Войти</button>
+        </form>
+    </div>
+</section>
+
+<footer id="footer" class="site-footer"> <!-- Подвал -->
+    <div class="container footer-container">
+        <p class="footer_text">Позвонить нам +7 800 000-00-00 • Москва, ул. Ланчей, 12</p>
+    </div>
+</footer>
+</body>
+</html>
