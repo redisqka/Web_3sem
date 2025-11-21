@@ -7,7 +7,7 @@ body {
     color: #2d2d2d;
     background-color: #f7f7f7;
 }
-
+    
 /* Flex-лейаут страницы */
 .page-body {
     display: flex;

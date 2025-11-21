@@ -1,219 +1,285 @@
-.hero { /* Промо-блок в верхней части страницы */
-    padding: 56px 0; /* Добавляем вертикальные отступы для воздуха */
-} /* Завершаем блок стилей .hero */
+/* Сброс отступов для main на странице ланча */
+.page-body .page-main {
+    padding: 0;
+    display: block;
+}
 
-.hero-container { /* Контейнер для содержимого промо-блока */
-    display: grid; /* Используем сетку для равномерного расположения */
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Создаём две равные колонки */
-    gap: 48px; /* Задаём расстояние между колонками */
-    align-items: center; /* Центрируем контент по вертикали */
-} /* Завершаем блок стилей .hero-container */
+.hero {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #ffe1d5 0%, #ffc6b0 100%);
+}
 
-.hero_text { /* Текстовая колонка героя */
-    display: flex; /* Включаем флекс для управления вертикальными отступами */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 20px; /* Добавляем равномерные промежутки между элементами */
-} /* Завершаем блок стилей .hero_text */
+.hero-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    align-items: center;
+}
 
-.hero_title { /* Заголовок промо-блока */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 42px; /* Увеличиваем размер шрифта для акцента */
-    line-height: 1.2; /* Настраиваем межстрочный интервал */
-} /* Завершаем блок стилей .hero_title */
+.hero_text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
 
-.hero_subtitle { /* Подзаголовок промо-блока */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 20px; /* Определяем размер шрифта */
-    color: #4c4c4c; /* Используем более мягкий оттенок текста */
-} /* Завершаем блок стилей .hero_subtitle */
+.hero_title {
+    margin: 0;
+    font-size: 42px;
+    line-height: 1.2;
+    color: #5a2d22;
+    font-weight: 700;
+}
 
-.hero_button { /* Кнопка для перехода к меню */
-    align-self: flex-start; /* Прижимаем кнопку к началу блока */
-} /* Завершаем блок стилей .hero_button */
+.hero_subtitle {
+    margin: 0;
+    font-size: 20px;
+    color: #7a4c1c;
+    line-height: 1.5;
+}
 
-.hero_image-wrapper { /* Обёртка для изображения геро-блока */
-    display: flex; /* Используем флекс для центрирования */
-    justify-content: center; /* Центрируем изображение по горизонтали */
-} /* Завершаем блок стилей .hero_image-wrapper */
+.hero_button {
+    align-self: flex-start;
+    margin-top: 10px;
+}
 
-.hero_image { /* Изображение в промо-блоке */
-    width: 100%; /* Позволяем изображению занимать всю ширину колонки */
-    max-width: 520px; /* Ограничиваем максимальную ширину */
-    border-radius: 28px; /* Скругляем углы изображения */
-} /* Завершаем блок стилей .hero_image */
+.hero_image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.menu-section { /* Общие стили для секций меню */
-    padding: 48px 0; /* Устанавливаем вертикальные отступы */
-} /* Завершаем блок стилей .menu-section */
+.hero_image {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 28px;
+}
 
-.menu-container { /* Контейнер с ограничением ширины для секций меню */
-    display: flex; /* Используем флекс для вертикального позиционирования */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 28px; /* Добавляем пространство между заголовком и карточками */
-} /* Завершаем блок стилей .menu-container */
+.menu-section {
+    padding: 80px 0;
+}
 
-.menu-section_header { /* Шапка раздела меню */
-    display: flex; /* Включаем флекс для выравнивания текста */
-    flex-direction: column; /* Располагаем заголовок и подпись вертикально */
-    gap: 8px; /* Добавляем компактный промежуток между элементами */
-} /* Завершаем блок стилей .menu-section_header */
+.menu-section:nth-child(even) {
+    background-color: rgba(255, 99, 71, 0.03);
+}
 
-.menu-title { /* Заголовок секции меню */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 34px; /* Увеличиваем размер шрифта */
-    text-transform: uppercase; /* Преобразуем текст в верхний регистр */
-    letter-spacing: 1px; /* Увеличиваем межбуквенное расстояние */
-} /* Завершаем блок стилей .menu-title */
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 
-.menu-subtitle { /* Подпись под заголовком секции */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 18px; /* Определяем размер шрифта */
-    color: #666; /* Используем нейтральный оттенок текста */
-} /* Завершаем блок стилей .menu-subtitle */
+.menu-section_header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
 
-.dish-grid { /* Сетка с блюдами */
-    display: grid; /* Используем CSS Grid для равномерного расположения */
-    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Создаём три колонки одинаковой ширины */
-    gap: 24px; /* Увеличиваем отступы между карточками для ровности */
-} /* Завершаем блок стилей .dish-grid */
+.menu-title {
+    margin: 0;
+    font-size: 34px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #2d2d2d;
+    font-weight: 700;
+}
 
-.dish-card { /* Карточка каждого блюда */
-    display: flex; /* Используем флекс для управления вертикальным расположением */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 14px; /* Добавляем промежуток между элементами карточки */
-    padding: 28px; /* Устанавливаем одинаковые внутренние отступы по кругу */
-    border-radius: 28px; /* Скругляем углы карточки */
-    background-color: #ffffff; /* Устанавливаем белый фон */
-    border: 1px solid rgba(255, 99, 71, 0.16); /* Добавляем тонкую границу фирменного цвета */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* Используем лёгкую тень для объёма */
-    cursor: pointer; /* Меняем курсор при наведении на карточку */
-    transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Добавляем плавные переходы */
-} /* Завершаем блок стилей .dish-card */
+.menu-subtitle {
+    margin: 0;
+    font-size: 18px;
+    color: #666;
+}
 
-.dish-card:hover { /* Состояние карточки при наведении */
-    transform: translateY(-4px); /* Поднимаем карточку для живости */
-    border-color: tomato; /* Делает границу ярче */
-    box-shadow: 0 16px 28px rgba(255, 99, 71, 0.18); /* Усиливаем тень фирменного цвета */
-} /* Завершаем блок hover для .dish-card */
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+}
 
-.dish-card:hover .dish-button { /* Контекстный селектор для кнопки внутри карточки */
-    background-color: tomato; /* Изменяем цвет фона кнопки при наведении на карточку */
-    color: #ffffff; /* Делаем текст кнопки белым */
-} /* Завершаем блок hover для кнопки внутри карточки */
+.dish-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 24px;
+    background-color: #ffffff;
+    border: 1px solid rgba(255, 99, 71, 0.16);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+}
 
-.dish-image { /* Стили для изображения блюда */
-    width: 100%; /* Растягиваем изображение на всю ширину карточки */
-    border-radius: 24px; /* Скругляем углы изображения */
-} /* Завершаем блок стилей .dish-image */
+.dish-card:hover {
+    transform: translateY(-8px);
+    border-color: tomato;
+    box-shadow: 0 16px 32px rgba(255, 99, 71, 0.18);
+}
 
-.dish-name { /* Стили для названия блюда */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 22px; /* Увеличиваем размер шрифта названия */
-    font-weight: 700; /* Делаем название жирным */
-} /* Завершаем блок стилей .dish-name */
+.dish-card:hover .dish-button {
+    background-color: tomato;
+    color: #ffffff;
+}
 
-.dish-price { /* Стили для цены блюда */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 20px; /* Увеличиваем размер шрифта для акцента на цене */
-    font-weight: 600; /* Делаем цену полужирной */
-} /* Завершаем блок стилей .dish-price */
+.dish-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 16px;
+}
 
-.dish-weight { /* Стили для веса или объёма блюда */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 16px; /* Определяем размер шрифта */
-    color: #707070; /* Используем более светлый оттенок */
-} /* Завершаем блок стилей .dish-weight */
+.dish-name {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d2d2d;
+}
 
-.dish-button { /* Стили для кнопки "Добавить" */
-    margin-top: auto; /* Прижимаем кнопку к нижнему краю карточки */
-    padding: 12px 24px; /* Устанавливаем внутренние отступы */
-    border-radius: 12px; /* Скругляем углы кнопки */
-    border: none; /* Убираем рамку кнопки */
-    background-color: rgba(255, 99, 71, 0.12); /* Устанавливаем светлый фоновый цвет */
-    color: tomato; /* Используем фирменный цвет для текста */
-    cursor: pointer; /* Меняем курсор на указатель */
-    font-weight: 600; /* Делаем текст кнопки выразительным */
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Добавляем плавные переходы */
-} /* Завершаем блок стилей .dish-button */
+.dish-price {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: tomato;
+}
 
-.combo-section { /* Дополнительные стили для секции комбо */
-    background-color: rgba(255, 99, 71, 0.05); /* Добавляем мягкий фон по фирменному цвету */
-} /* Завершаем блок стилей .combo-section */
+.dish-weight {
+    margin: 0;
+    font-size: 16px;
+    color: #707070;
+}
 
-.combo-card { /* Карточка спецпредложения */
-    display: flex; /* Используем флекс для распределения элементов */
-    align-items: center; /* Центрируем элементы по вертикали */
-    justify-content: space-between; /* Разносим текст и кнопку */
-    gap: 24px; /* Устанавливаем расстояние между элементами */
-    padding: 32px; /* Устанавливаем внутренние отступы */
-    border-radius: 28px; /* Скругляем углы карточки */
-    background-color: #ffffff; /* Устанавливаем белый фон */
-    border: 1px solid rgba(255, 99, 71, 0.16); /* Добавляем тонкую границу */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); /* Добавляем лёгкую тень */
-} /* Завершаем блок стилей .combo-card */
+.dish-button {
+    margin-top: auto;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    background-color: rgba(255, 99, 71, 0.12);
+    color: tomato;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
 
-.combo-info { /* Текстовый блок внутри комбо-карточки */
-    display: flex; /* Включаем флекс */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    gap: 10px; /* Добавляем промежуток между строками */
-} /* Завершаем блок стилей .combo-info */
+.dish-button:hover {
+    background-color: tomato;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
 
-.combo-name { /* Название комбо */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 24px; /* Увеличиваем размер шрифта */
-    font-weight: 700; /* Делаем текст жирным */
-} /* Завершаем блок стилей .combo-name */
+.combo-section {
+    background-color: rgba(255, 99, 71, 0.05);
+    border-top: 1px solid rgba(255, 99, 71, 0.1);
+    border-bottom: 1px solid rgba(255, 99, 71, 0.1);
+}
 
-.combo-details { /* Описание комбо */
-    margin: 0; /* Убираем внешние отступы */
-    font-size: 18px; /* Определяем размер шрифта */
-    color: #4c4c4c; /* Настраиваем цвет текста */
-} /* Завершаем блок стилей .combo-details */
+.combo-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 40px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #fff8f6 100%);
+    border: 1px solid rgba(255, 99, 71, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
 
-.combo-button { /* Стили для кнопки комбо */
-    flex-shrink: 0; /* Запрещаем кнопке сжиматься */
-} /* Завершаем блок стилей .combo-button */
+.combo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
 
-/* RESPONSIVE: адаптация страницы "Собрать ланч" */
-@media (max-width: 1024px) { /* Медиа-запрос для экранов до 1024px */
-    .hero-container { /* Корректировка промо-блока */
-        grid-template-columns: 1fr; /* Переключаемся на одну колонку */
-        text-align: center; /* Центрируем текстовые элементы */
-    } /* Завершаем блок .hero-container в медиазапросе */
+.combo-name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d2d2d;
+}
 
-    .hero_text { /* Корректировка текста героя */
-        align-items: center; /* Центрируем элементы */
-    } /* Завершаем блок .hero_text в медиазапросе */
+.combo-details {
+    margin: 0;
+    font-size: 18px;
+    color: #4c4c4c;
+    line-height: 1.5;
+}
 
-    .hero_button { /* Корректировка кнопки героя */
-        align-self: center; /* Центрируем кнопку */
-    } /* Завершаем блок .hero_button в медиазапросе */
+.combo-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
 
-    .dish-grid { /* Корректировка сетки блюд */
-        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Переключаемся на две колонки */
-    } /* Завершаем блок .dish-grid в медиазапросе */
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
 
-    .combo-card { /* Корректировка карточки комбо */
-        flex-direction: column; /* Переключаемся на вертикальное расположение */
-        align-items: stretch; /* Растягиваем элементы на всю ширину */
-        text-align: center; /* Центрируем текст */
-    } /* Завершаем блок .combo-card в медиазапросе */
+    .hero_text {
+        align-items: center;
+    }
 
-    .combo-button { /* Корректировка кнопки комбо */
-        align-self: center; /* Центрируем кнопку */
-    } /* Завершаем блок .combo-button в медиазапросе */
-} /* Завершаем медиазапрос */
+    .hero_button {
+        align-self: center;
+    }
 
-@media (max-width: 680px) { /* Медиа-запрос для экранов до 680px */
-    .dish-grid { /* Корректировка сетки блюд */
-        grid-template-columns: 1fr; /* Переключаемся на одну колонку */
-    } /* Завершаем блок .dish-grid в медиазапросе */
+    .dish-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-    .hero_title { /* Корректировка заголовка героя */
-        font-size: 34px; /* Уменьшаем размер шрифта */
-    } /* Завершаем блок .hero_title в медиазапросе */
+    .combo-card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 24px;
+    }
 
-    .menu-title { /* Корректировка заголовков секций */
-        font-size: 28px; /* Уменьшаем размер шрифта */
-    } /* Завершаем блок .menu-title в медиазапросе */
+    .combo-button {
+        align-self: center;
+    }
+}
+
+@media (max-width: 680px) {
+    .hero {
+        padding: 60px 0;
+    }
+
+    .hero_title {
+        font-size: 32px;
+    }
+
+    .menu-section {
+        padding: 60px 0;
+    }
+
+    .menu-title {
+        font-size: 28px;
+    }
+
+    .dish-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .combo-card {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero_title {
+        font-size: 28px;
+    }
+
+    .hero_subtitle {
+        font-size: 18px;
+    }
+
+    .menu-title {
+        font-size: 24px;
+    }
 }
