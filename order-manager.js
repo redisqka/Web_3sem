@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3 class="total-title">Стоимость заказа</h3>
                         <p class="total-price">0₽</p>
                     </div>
-                    <form id="order-form" class="order-form" action="https://httpbin.org/post" method="POST">
+                    <form id="order-form" class="order-form" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data accept-charset="UTF-8"">
                         <div class="form-group">
                             <label for="customer-name">Ваше имя</label>
                             <input id="customer-name" name="customerName" type="text" placeholder="Иван Иванов" required>
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </label>
                             </div>
                         </div>
-                        <input type="hidden" name="selectedDishes" id="selected-dishes">
+                        <input type="hidden" name="selectedDishesKeywords" id="selected-dishes-keywords">
                         <input type="hidden" name="totalPrice" id="total-price">
                         <button type="submit" class="primary-button">Оформить заказ</button>
                     </form>
@@ -200,12 +200,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateFormData() {
-        const selectedKeywords = Object.values(selectedDishes)
-            .filter(dish => dish !== null)
+        const selectedDishesArray = Object.values(selectedDishes).filter(dish => dish !== null);
+        
+        // Ключи блюд на латинице
+        const selectedKeywords = selectedDishesArray
             .map(dish => dish.keyword)
             .join(',');
         
-        document.getElementById('selected-dishes').value = selectedKeywords;
+        document.getElementById('selected-dishes-keywords').value = selectedKeywords;
         document.getElementById('total-price').value = calculateTotalPrice();
     }
     
