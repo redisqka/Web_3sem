@@ -2,8 +2,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     let selectedDishes = {
         soup: null,
+        starter: null,
         main: null,
-        drink: null
+        drink: null,
+        dessert: null
     };
     
     // Инициализируем блок заказа
@@ -22,6 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Обработчик изменения радиокнопок времени доставки
+    document.addEventListener('change', function(e) {
+        if (e.target.name === 'deliveryTime') {
+            toggleTimeInput();
+        }
+    });
+    
     function selectDish(dish) {
         // Снимаем выделение со всех карточек в этой категории
         const categoryCards = document.querySelectorAll(`[data-dish]`);
@@ -31,9 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Выделяем выбранную карточку
+        // Выделяем выбранную карточку (если она видима)
         const selectedCard = document.querySelector(`[data-dish="${dish.keyword}"]`);
-        selectedCard.classList.add('selected');
+        if (selectedCard && selectedCard.style.display !== 'none') {
+            selectedCard.classList.add('selected');
+        }
         
         // Сохраняем выбранное блюдо
         selectedDishes[dish.category] = dish;
@@ -62,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3 class="total-title">Стоимость заказа</h3>
                         <p class="total-price">0₽</p>
                     </div>
-                    <form id="order-form" class="order-form" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data accept-charset="UTF-8"">
+                    <form id="order-form" class="order-form" action="https://httpbingo.org/post" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
                         <div class="form-group">
                             <label for="customer-name">Ваше имя</label>
                             <input id="customer-name" name="customerName" type="text" placeholder="Иван Иванов" required>
@@ -91,13 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <div class="form-group">
                             <label>Время доставки</label>
-                            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
                                 <label class="radio-option">
                                     <input type="radio" name="deliveryTime" value="asap" checked> Как можно быстрее
                                 </label>
                                 <label class="radio-option">
                                     <input type="radio" name="deliveryTime" value="specified"> К указанному времени
                                 </label>
+                            </div>
+                            <div id="time-input-container" class="time-input-container" style="display: none;">
+                                <label for="delivery-time">Укажите время доставки</label>
+                                <input id="delivery-time" name="deliveryTimeValue" type="time" min="09:00" max="22:00" style="margin-top: 8px;">
+                                <p style="font-size: 14px; color: #707070; margin: 4px 0 0 0;">Доставка доступна с 09:00 до 22:00</p>
                             </div>
                         </div>
                         <input type="hidden" name="selectedDishesKeywords" id="selected-dishes-keywords">
@@ -116,6 +132,40 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('order-form').addEventListener('submit', function(e) {
             updateFormData();
         });
+        
+        // Инициализируем состояние поля времени
+        toggleTimeInput();
+    }
+    
+    function toggleTimeInput() {
+        const timeInputContainer = document.getElementById('time-input-container');
+        const specifiedTimeRadio = document.querySelector('input[name="deliveryTime"][value="specified"]');
+        
+        if (specifiedTimeRadio && specifiedTimeRadio.checked) {
+            timeInputContainer.style.display = 'block';
+            // Устанавливаем минимальное время - текущее время + 1 час
+            setMinDeliveryTime();
+        } else {
+            timeInputContainer.style.display = 'none';
+        }
+    }
+    
+    function setMinDeliveryTime() {
+        const timeInput = document.getElementById('delivery-time');
+        const now = new Date();
+        const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+        
+        // Форматируем время в формат HH:MM
+        const hours = oneHourLater.getHours().toString().padStart(2, '0');
+        const minutes = oneHourLater.getMinutes().toString().padStart(2, '0');
+        const minTime = `${hours}:${minutes}`;
+        
+        timeInput.min = minTime;
+        
+        // Устанавливаем значение по умолчанию - ближайшее доступное время
+        if (!timeInput.value) {
+            timeInput.value = minTime;
+        }
     }
     
     function updateOrderDisplay() {
@@ -139,11 +189,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="selected-dish">${selectedDishes.soup.name} - ${selectedDishes.soup.price}₽</p>
                 </div>
             `;
-        } else {
+        }
+        
+        // Стартеры
+        if (selectedDishes.starter) {
             orderHTML += `
                 <div class="order-category">
-                    <h3 class="category-title">Суп</h3>
-                    <p class="no-dish">Блюдо не выбрано</p>
+                    <h3 class="category-title">Салат или стартер</h3>
+                    <p class="selected-dish">${selectedDishes.starter.name} - ${selectedDishes.starter.price}₽</p>
                 </div>
             `;
         }
@@ -156,13 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="selected-dish">${selectedDishes.main.name} - ${selectedDishes.main.price}₽</p>
                 </div>
             `;
-        } else {
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Главное блюдо</h3>
-                    <p class="no-dish">Блюдо не выбрано</p>
-                </div>
-            `;
         }
         
         // Напитки
@@ -173,11 +219,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="selected-dish">${selectedDishes.drink.name} - ${selectedDishes.drink.price}₽</p>
                 </div>
             `;
-        } else {
+        }
+        
+        // Десерты
+        if (selectedDishes.dessert) {
             orderHTML += `
                 <div class="order-category">
-                    <h3 class="category-title">Напиток</h3>
-                    <p class="no-dish">Напиток не выбран</p>
+                    <h3 class="category-title">Десерт</h3>
+                    <p class="selected-dish">${selectedDishes.dessert.name} - ${selectedDishes.dessert.price}₽</p>
                 </div>
             `;
         }
@@ -209,6 +258,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.getElementById('selected-dishes-keywords').value = selectedKeywords;
         document.getElementById('total-price').value = calculateTotalPrice();
+        
+        // Валидация времени доставки
+        const specifiedTimeRadio = document.querySelector('input[name="deliveryTime"][value="specified"]');
+        const timeInput = document.getElementById('delivery-time');
+        
+        if (specifiedTimeRadio && specifiedTimeRadio.checked && !timeInput.value) {
+            alert('Пожалуйста, укажите время доставки');
+            return false;
+        }
     }
     
     function calculateTotalPrice() {

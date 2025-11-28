@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Отображаем блюда по категориям
     displayDishesByCategory('soup', '#soups .dish-grid');
+    displayDishesByCategory('starter', '#starters .dish-grid');
     displayDishesByCategory('main', '#mains .dish-grid');
     displayDishesByCategory('drink', '#drinks .dish-grid');
+    displayDishesByCategory('dessert', '#desserts .dish-grid');
     
     function displayDishesByCategory(category, gridSelector) {
         const grid = document.querySelector(gridSelector);
@@ -22,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const article = document.createElement('article');
         article.className = 'dish-card';
         article.setAttribute('data-dish', dish.keyword);
+        article.setAttribute('data-kind', dish.kind);
         
         article.innerHTML = `
             <img class="dish-image" src="${dish.image}" alt="${dish.name}">

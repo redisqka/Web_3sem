@@ -20,8 +20,10 @@
                 <li class="header_item"><a class="nav_link" href="./index.html">Главная</a></li>
                 <li class="header_item"><a class="nav_link active" href="./lunch.html">Собрать ланч</a></li>
                 <li class="header_item"><a class="nav_link" href="#soups">Супы</a></li>
+                <li class="header_item"><a class="nav_link" href="#starters">Стартеры</a></li>
                 <li class="header_item"><a class="nav_link" href="#mains">Горячие блюда</a></li>
                 <li class="header_item"><a class="nav_link" href="#drinks">Напитки</a></li>
+                <li class="header_item"><a class="nav_link" href="#desserts">Десерты</a></li>
                 <li class="header_item"><a class="nav_link" href="#order">Ваш заказ</a></li>
                 <li class="header_item"><a class="nav_link" href="#special">Комбо</a></li>
             </ul>
@@ -49,8 +51,32 @@
                 <h2 class="menu-title">Супы</h2>
                 <p class="menu-subtitle">Тёплое начало обеда</p>
             </header>
+            <div class="filters">
+                <button class="filter-btn active" data-kind="all">Все</button>
+                <button class="filter-btn" data-kind="fish">Рыбный</button>
+                <button class="filter-btn" data-kind="meat">Мясной</button>
+                <button class="filter-btn" data-kind="veg">Вегетарианский</button>
+            </div>
             <div class="dish-grid">
                 <!-- Карточки супов будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="starters" class="menu-section">
+        <div class="container menu-container">
+            <header class="menu-section_header">
+                <h2 class="menu-title">Салаты и стартеры</h2>
+                <p class="menu-subtitle">Лёгкое начало трапезы</p>
+            </header>
+            <div class="filters">
+                <button class="filter-btn active" data-kind="all">Все</button>
+                <button class="filter-btn" data-kind="fish">Рыбный</button>
+                <button class="filter-btn" data-kind="meat">Мясной</button>
+                <button class="filter-btn" data-kind="veg">Вегетарианский</button>
+            </div>
+            <div class="dish-grid">
+                <!-- Карточки салатов и стартеров будут добавлены через JavaScript -->
             </div>
         </div>
     </section>
@@ -61,6 +87,12 @@
                 <h2 class="menu-title">Горячие блюда</h2>
                 <p class="menu-subtitle">Основы вашего ланча</p>
             </header>
+            <div class="filters">
+                <button class="filter-btn active" data-kind="all">Все</button>
+                <button class="filter-btn" data-kind="fish">Рыбное</button>
+                <button class="filter-btn" data-kind="meat">Мясное</button>
+                <button class="filter-btn" data-kind="veg">Вегетарианское</button>
+            </div>
             <div class="dish-grid">
                 <!-- Карточки горячих блюд будут добавлены через JavaScript -->
             </div>
@@ -73,8 +105,31 @@
                 <h2 class="menu-title">Напитки</h2>
                 <p class="menu-subtitle">Освежающие вкусы</p>
             </header>
+            <div class="filters">
+                <button class="filter-btn active" data-kind="all">Все</button>
+                <button class="filter-btn" data-kind="hot">Горячий</button>
+                <button class="filter-btn" data-kind="cold">Холодный</button>
+            </div>
             <div class="dish-grid">
                 <!-- Карточки напитков будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="desserts" class="menu-section">
+        <div class="container menu-container">
+            <header class="menu-section_header">
+                <h2 class="menu-title">Десерты</h2>
+                <p class="menu-subtitle">Сладкое завершение</p>
+            </header>
+            <div class="filters">
+                <button class="filter-btn active" data-kind="all">Все</button>
+                <button class="filter-btn" data-kind="small">Маленькая порция</button>
+                <button class="filter-btn" data-kind="medium">Средняя порция</button>
+                <button class="filter-btn" data-kind="large">Большая порция</button>
+            </div>
+            <div class="dish-grid">
+                <!-- Карточки десертов будут добавлены через JavaScript -->
             </div>
         </div>
     </section>
@@ -104,5 +159,6 @@
 <script src="dishes.js"></script>
 <script src="display-dishes.js"></script>
 <script src="order-manager.js"></script>
+<script src="filter-dishes.js"></script>
 </body>
 </html>

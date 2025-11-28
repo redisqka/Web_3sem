@@ -322,6 +322,82 @@
     outline: none;
 }
 
+/* Стили для поля ввода времени */
+.time-input-container {
+    background-color: rgba(255, 99, 71, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255, 99, 71, 0.1);
+    margin-top: 8px;
+    animation: fadeIn 0.3s ease;
+}
+
+.time-input-container label {
+    font-weight: 600;
+    color: #2d2d2d;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.time-input-container input[type="time"] {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 99, 71, 0.3);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+.time-input-container input[type="time"]:focus {
+    border-color: tomato;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.2);
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для фильтров */
+.filters {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid rgba(255, 99, 71, 0.3);
+    border-radius: 20px;
+    background-color: transparent;
+    color: #2d2d2d;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: tomato;
+    background-color: rgba(255, 99, 71, 0.1);
+}
+
+.filter-btn.active {
+    background-color: tomato;
+    color: #ffffff;
+    border-color: tomato;
+}
+
 /* Адаптивность */
 @media (max-width: 1024px) {
     .hero-container {
@@ -379,6 +455,10 @@
     .combo-card {
         padding: 24px;
     }
+
+    .time-input-container input[type="time"] {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -392,5 +472,14 @@
 
     .menu-title {
         font-size: 24px;
+    }
+
+    .filters {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 13px;
     }
 }
