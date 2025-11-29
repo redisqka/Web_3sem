@@ -483,3 +483,155 @@
         font-size: 13px;
     }
 }
+
+/* Стили для блока вариантов ланча */
+.combo-variants-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.combo-variant {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: 2px solid rgba(255, 99, 71, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.combo-variant:hover {
+    border-color: rgba(255, 99, 71, 0.3);
+    box-shadow: 0 12px 24px rgba(255, 99, 71, 0.15);
+}
+
+.combo-dish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.combo-dish-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.combo-dish-image:hover {
+    transform: translateY(-8px) scale(1.1);
+}
+
+.combo-dish-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2d2d;
+    text-align: center;
+}
+
+.dessert-info {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 99, 71, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 99, 71, 0.1);
+}
+
+.dessert-note {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Стили для уведомлений */
+.notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.notification {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: notificationSlideIn 0.3s ease-out;
+}
+
+@keyframes notificationSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.notification-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2d2d2d;
+    margin: 0 0 16px 0;
+}
+
+.notification-message {
+    font-size: 18px;
+    color: #666;
+    margin: 0 0 32px 0;
+    line-height: 1.5;
+}
+
+.notification-button {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 16px;
+    background-color: tomato;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notification-button:hover {
+    background-color: #ff7b61;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 99, 71, 0.3);
+}
+
+/* Адаптивность для блока вариантов */
+@media (max-width: 1024px) {
+    .combo-variants-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .combo-variants-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .combo-variant {
+        padding: 20px;
+    }
+}

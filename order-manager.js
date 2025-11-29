@@ -1,6 +1,7 @@
-// order-manager.js - управление заказом
+// order-manager.js
 document.addEventListener('DOMContentLoaded', function() {
-    let selectedDishes = {
+    // Делаем selectedDishes глобальной переменной
+    window.selectedDishes = {
         soup: null,
         starter: null,
         main: null,
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Сохраняем выбранное блюдо
-        selectedDishes[dish.category] = dish;
+        window.selectedDishes[dish.category] = dish;
         
         // Обновляем отображение заказа
         updateOrderDisplay();
@@ -171,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateOrderDisplay() {
         const orderItems = document.getElementById('order-items');
         const orderTotal = document.getElementById('order-total');
-        const hasSelectedDishes = Object.values(selectedDishes).some(dish => dish !== null);
+        const hasSelectedDishes = Object.values(window.selectedDishes).some(dish => dish !== null);
         
         if (!hasSelectedDishes) {
             orderItems.innerHTML = '<p class="no-selection">Ничего не выбрано</p>';
@@ -182,51 +183,51 @@ document.addEventListener('DOMContentLoaded', function() {
         let orderHTML = '';
         
         // Супы
-        if (selectedDishes.soup) {
+        if (window.selectedDishes.soup) {
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Суп</h3>
-                    <p class="selected-dish">${selectedDishes.soup.name} - ${selectedDishes.soup.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes.soup.name} - ${window.selectedDishes.soup.price}₽</p>
                 </div>
             `;
         }
         
         // Стартеры
-        if (selectedDishes.starter) {
+        if (window.selectedDishes.starter) {
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Салат или стартер</h3>
-                    <p class="selected-dish">${selectedDishes.starter.name} - ${selectedDishes.starter.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes.starter.name} - ${window.selectedDishes.starter.price}₽</p>
                 </div>
             `;
         }
         
         // Горячие блюда
-        if (selectedDishes.main) {
+        if (window.selectedDishes.main) {
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Главное блюдо</h3>
-                    <p class="selected-dish">${selectedDishes.main.name} - ${selectedDishes.main.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes.main.name} - ${window.selectedDishes.main.price}₽</p>
                 </div>
             `;
         }
         
         // Напитки
-        if (selectedDishes.drink) {
+        if (window.selectedDishes.drink) {
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Напиток</h3>
-                    <p class="selected-dish">${selectedDishes.drink.name} - ${selectedDishes.drink.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes.drink.name} - ${window.selectedDishes.drink.price}₽</p>
                 </div>
             `;
         }
         
         // Десерты
-        if (selectedDishes.dessert) {
+        if (window.selectedDishes.dessert) {
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Десерт</h3>
-                    <p class="selected-dish">${selectedDishes.dessert.name} - ${selectedDishes.dessert.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes.dessert.name} - ${window.selectedDishes.dessert.price}₽</p>
                 </div>
             `;
         }
@@ -239,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalElement = document.querySelector('.total-price');
         let total = 0;
         
-        Object.values(selectedDishes).forEach(dish => {
+        Object.values(window.selectedDishes).forEach(dish => {
             if (dish) {
                 total += dish.price;
             }
@@ -249,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateFormData() {
-        const selectedDishesArray = Object.values(selectedDishes).filter(dish => dish !== null);
+        const selectedDishesArray = Object.values(window.selectedDishes).filter(dish => dish !== null);
         
         // Ключи блюд на латинице
         const selectedKeywords = selectedDishesArray
@@ -271,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function calculateTotalPrice() {
         let total = 0;
-        Object.values(selectedDishes).forEach(dish => {
+        Object.values(window.selectedDishes).forEach(dish => {
             if (dish) total += dish.price;
         });
         return total;
