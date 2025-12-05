@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.selectedDishes = {
         soup: null,
         starter: null,
-        main: null,
+        'main-course': null, // ИЗМЕНЕНО: было 'main', стало 'main-course'
         drink: null,
         dessert: null
     };
@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Снимаем выделение со всех карточек в этой категории
         const categoryCards = document.querySelectorAll(`[data-dish]`);
         categoryCards.forEach(card => {
-            if (dishes.find(d => d.keyword === card.getAttribute('data-dish'))?.category === dish.category) {
+            const cardDish = dishes.find(d => d.keyword === card.getAttribute('data-dish'));
+            if (cardDish && cardDish.category === dish.category) {
                 card.classList.remove('selected');
             }
         });
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Сохраняем выбранное блюдо
+        // Используем квадратные скобки для доступа к свойству с дефисом
         window.selectedDishes[dish.category] = dish;
         
         // Обновляем отображение заказа
@@ -127,7 +129,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Вставляем перед комбо-секцией
         const comboSection = document.querySelector('#special');
-        comboSection.parentNode.insertBefore(orderSection, comboSection);
+        if (comboSection) {
+            comboSection.parentNode.insertBefore(orderSection, comboSection);
+        }
         
         // Добавляем обработчик отправки формы
         document.getElementById('order-form').addEventListener('submit', function(e) {
@@ -192,22 +196,22 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }
         
-        // Стартеры
+        // Стартеры (салаты)
         if (window.selectedDishes.starter) {
             orderHTML += `
                 <div class="order-category">
-                    <h3 class="category-title">Салат или стартер</h3>
+                    <h3 class="category-title">Салат</h3>
                     <p class="selected-dish">${window.selectedDishes.starter.name} - ${window.selectedDishes.starter.price}₽</p>
                 </div>
             `;
         }
         
-        // Горячие блюда
-        if (window.selectedDishes.main) {
+        // Горячие блюда (main-course)
+        if (window.selectedDishes['main-course']) { // ИЗМЕНЕНО: доступ через квадратные скобки
             orderHTML += `
                 <div class="order-category">
                     <h3 class="category-title">Главное блюдо</h3>
-                    <p class="selected-dish">${window.selectedDishes.main.name} - ${window.selectedDishes.main.price}₽</p>
+                    <p class="selected-dish">${window.selectedDishes['main-course'].name} - ${window.selectedDishes['main-course'].price}₽</p>
                 </div>
             `;
         }

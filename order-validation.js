@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Определяем допустимые комбинации блюд
+    // ИЗМЕНЕНО: везде 'main' заменено на 'main-course'
     const validCombinations = [
-        ['soup', 'main', 'starter'],    
-        ['soup', 'main', 'drink'],      
+        ['soup', 'main-course', 'starter'],    
+        ['soup', 'main-course', 'drink'],      
         ['soup', 'starter', 'drink'],   
-        ['main', 'starter', 'drink'],   
-        ['main', 'drink', 'dessert']   
+        ['main-course', 'starter', 'drink'],   
+        ['main-course', 'drink', 'dessert']   
     ];
 
     function isValidCombination(selectedCategories) {
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Анализируем выбранные категории для точного определения недостающего
         const hasSoup = selectedCategories.includes('soup');
-        const hasMain = selectedCategories.includes('main');
+        const hasMain = selectedCategories.includes('main-course'); // ИЗМЕНЕНО
         const hasStarter = selectedCategories.includes('starter');
         const hasDrink = selectedCategories.includes('drink');
         const hasDessert = selectedCategories.includes('dessert');
