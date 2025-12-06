@@ -1,7 +1,9 @@
+// order-validation.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Определяем допустимые комбинации блюд
-    // ИЗМЕНЕНО: везде 'main' заменено на 'main-course'
-    const validCombinations = [
+    console.log('Order Validation: Загружен');
+    
+    // Делаем функции глобальными сразу
+    window.validCombinations = [
         ['soup', 'main-course', 'starter'],    
         ['soup', 'main-course', 'drink'],      
         ['soup', 'starter', 'drink'],   
@@ -9,18 +11,30 @@ document.addEventListener('DOMContentLoaded', function() {
         ['main-course', 'drink', 'dessert']   
     ];
 
-    function isValidCombination(selectedCategories) {
-        return validCombinations.some(combination => {
-            return combination.every(category => selectedCategories.includes(category));
-        });
-    }
-
-    // Функция для определения недостающих блюд
-    function getMissingItems(selectedCategories) {
-        const selectedCount = selectedCategories.length;
+    window.isValidCombination = function(selectedCategories) {
+        if (!selectedCategories || !Array.isArray(selectedCategories)) {
+            console.warn('isValidCombination: selectedCategories не массив:', selectedCategories);
+            return false;
+        }
         
-       
-        if (selectedCount === 0) {
+        console.log('isValidCombination: Проверяем категории:', selectedCategories);
+        
+        const result = window.validCombinations.some(combination => {
+            const isValid = combination.every(category => selectedCategories.includes(category));
+            if (isValid) {
+                console.log('isValidCombination: Найдено валидное комбо:', combination);
+            }
+            return isValid;
+        });
+        
+        console.log('isValidCombination: Результат:', result);
+        return result;
+    };
+
+    window.getMissingItems = function(selectedCategories) {
+        console.log('getMissingItems: Категории:', selectedCategories);
+        
+        if (!selectedCategories || selectedCategories.length === 0) {
             return {
                 isValid: false,
                 message: 'Ничего не выбрано. Выберите блюда для заказа',
@@ -28,153 +42,101 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
 
-        
-        if (isValidCombination(selectedCategories)) {
+        if (window.isValidCombination(selectedCategories)) {
             return {
                 isValid: true,
-                message: '',
+                message: 'Заказ соответствует одному из доступных комбо',
                 type: 'valid'
             };
         }
 
-        // Анализируем выбранные категории для точного определения недостающего
+        // Анализируем
         const hasSoup = selectedCategories.includes('soup');
-        const hasMain = selectedCategories.includes('main-course'); // ИЗМЕНЕНО
+        const hasMain = selectedCategories.includes('main-course');
         const hasStarter = selectedCategories.includes('starter');
         const hasDrink = selectedCategories.includes('drink');
         const hasDessert = selectedCategories.includes('dessert');
         
-        const selectedMainCategories = selectedCategories.filter(cat => 
-            cat !== 'drink' && cat !== 'dessert'
-        ).length;
-
-        // 1: Выбраны только напиток и/или десерт
-        if (selectedMainCategories === 0 && (hasDrink || hasDessert)) {
+        // 1. Только напиток/десерт
+        if ((hasDrink || hasDessert) && !hasSoup && !hasMain && !hasStarter) {
             return {
                 isValid: false,
-                message: 'Выберите главное блюдо',
-                type: 'missing_main_with_drink'
+                message: 'Добавьте суп, главное блюдо или салат к напитку/десерту',
+                type: 'missing_main'
             };
         }
-
-        // 2: Выбран только суп
-        if (hasSoup && !hasMain && !hasStarter) {
+        
+        // 2. Только суп
+        if (hasSoup && !hasMain && !hasStarter && !hasDrink) {
             return {
                 isValid: false,
-                message: 'Выберите главное блюдо/салат/стартер',
-                type: 'missing_main_or_starter_with_soup'
+                message: 'Добавьте главное блюдо или салат + напиток к супу',
+                type: 'missing_combo_with_soup'
             };
         }
-
-        // 3: Выбран только салат/стартер
-        if (hasStarter && !hasSoup && !hasMain) {
+        
+        // 3. Суп + главное, но нет напитка/салата
+        if (hasSoup && hasMain && !hasDrink && !hasStarter) {
             return {
                 isValid: false,
-                message: 'Выберите суп или главное блюдо',
-                type: 'missing_soup_or_main_with_starter'
+                message: 'Добавьте напиток или салат к супу и главному блюду',
+                type: 'missing_drink_or_salad'
             };
         }
-
-        // 4: Выбраны суп + главное, но нет напитка/салата
-        if (hasSoup && hasMain && !hasStarter && !hasDrink) {
-            return {
-                isValid: false,
-                message: 'Выберите напиток',
-                type: 'missing_drink'
-            };
-        }
-
-        // 5: Выбраны суп + салат, но нет главного/напитка
+        
+        // 4. Суп + салат, но нет главного/напитка
         if (hasSoup && hasStarter && !hasMain && !hasDrink) {
             return {
                 isValid: false,
-                message: 'Выберите главное блюдо',
-                type: 'missing_main_with_starter'
+                message: 'Добавьте главное блюдо или напиток к супу и салату',
+                type: 'missing_main_or_drink'
             };
         }
-
-        // 6: Выбраны главное + салат, но нет напитка
+        
+        // 5. Главное + салат, но нет напитка
         if (hasMain && hasStarter && !hasDrink) {
             return {
                 isValid: false,
-                message: 'Выберите напиток',
+                message: 'Добавьте напиток к главному блюду и салату',
                 type: 'missing_drink'
             };
         }
-
-        // 7: Выбраны главное + десерт, но нет напитка
+        
+        // 6. Главное + десерт, но нет напитка
         if (hasMain && hasDessert && !hasDrink) {
             return {
                 isValid: false,
-                message: 'Выберите напиток',
-                type: 'missing_drink'
+                message: 'Добавьте напиток к главному блюду и десерту',
+                type: 'missing_drink_with_dessert'
             };
         }
-
-        // не хватает напитка
+        
+        // 7. Общий случай - не хватает напитка
+        if (!hasDrink) {
+            return {
+                isValid: false,
+                message: 'В любом комбо должен быть напиток. Добавьте напиток.',
+                type: 'missing_drink_general'
+            };
+        }
+        
+        // 8. Общий случай - не хватает второго элемента комбо
+        const selectedCount = selectedCategories.length;
+        if (selectedCount < 3) {
+            return {
+                isValid: false,
+                message: 'Выберите еще одно блюдо для составления комбо (нужно минимум 3 блюда)',
+                type: 'not_enough_items'
+            };
+        }
+        
+        // 9. Неизвестная комбинация
         return {
             isValid: false,
-            message: 'Выберите напиток',
-            type: 'missing_drink_general'
+            message: 'Выбранная комбинация не соответствует доступным комбо. Выберите суп + главное + салат/напиток ИЛИ главное + салат + напиток ИЛИ главное + напиток + десерт',
+            type: 'invalid_combo'
         };
-    }
+    };
 
-    // Функция для показа уведомления
-    function showNotification(message) {
-        
-        const overlay = document.createElement('div');
-        overlay.className = 'notification-overlay';
-        
-        // Создаем уведомление
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.innerHTML = `
-            <h3 class="notification-title">Внимание</h3>
-            <p class="notification-message">${message}</p>
-            <button class="notification-button">Окей</button>
-        `;
-        
-        overlay.appendChild(notification);
-        document.body.appendChild(overlay);
-        
-        // Обработчик закрытия уведомления
-        const closeButton = notification.querySelector('.notification-button');
-        closeButton.addEventListener('click', function() {
-            document.body.removeChild(overlay);
-        });
-        
-        // Закрытие по клику на оверлей
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                document.body.removeChild(overlay);
-            }
-        });
-    }
-
-    // Добавляем обработчик отправки формы
-    document.addEventListener('submit', function(e) {
-        if (e.target.id === 'order-form') {
-            e.preventDefault();
-            
-            // Получаем выбранные категории из глобальной переменной
-            const selectedCategories = Object.keys(window.selectedDishes)
-                .filter(category => window.selectedDishes[category] !== null);
-            
-            console.log('Выбранные категории:', selectedCategories); // Для отладки
-            
-            // Проверяем комбинацию
-            const validation = getMissingItems(selectedCategories);
-            
-            console.log('Результат проверки:', validation); // Для отладки
-            
-            if (validation.isValid) {
-                // Если комбинация валидна, отправляем форму
-                // updateFormData() вызывается в order-manager.js
-                e.target.submit();
-            } else {
-                // Показываем уведомление
-                showNotification(validation.message);
-            }
-        }
-    });
+    console.log('Order Validation: Функции инициализированы');
 });

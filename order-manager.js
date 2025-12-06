@@ -1,284 +1,263 @@
 // order-manager.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Делаем selectedDishes глобальной переменной
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Order Manager: DOM загружен');
+    
+    // Ждём загрузки блюд
+    await waitForDishesLoaded();
+    console.log('Order Manager: Блюда загружены, всего:', dishes.length);
+    
+    // Инициализируем панель заказа
+    initOrderPanel();
+    
+    // Загружаем сохранённые выборы
+    loadSelectedDishesFromStorage();
+    
+    // Настраиваем обработчики событий
+    setupEventListeners();
+    
+    // Обновляем панель
+    updateOrderPanel();
+});
+
+function waitForDishesLoaded() {
+    return new Promise((resolve) => {
+        if (dishes && dishes.length > 0) {
+            resolve();
+            return;
+        }
+        
+        // Ждём загрузки блюд
+        const checkInterval = setInterval(() => {
+            if (dishes && dishes.length > 0) {
+                clearInterval(checkInterval);
+                resolve();
+            }
+        }, 100);
+        
+        // Таймаут на случай проблем
+        setTimeout(() => {
+            clearInterval(checkInterval);
+            console.warn('Order Manager: Таймаут ожидания блюд');
+            resolve();
+        }, 3000);
+    });
+}
+
+function loadSelectedDishesFromStorage() {
+    console.log('Order Manager: Загрузка из localStorage');
+    
+    // Инициализируем глобальную переменную
     window.selectedDishes = {
         soup: null,
         starter: null,
-        'main-course': null, // ИЗМЕНЕНО: было 'main', стало 'main-course'
+        'main-course': null,
         drink: null,
         dessert: null
     };
     
-    // Инициализируем блок заказа
-    initOrderSection();
+    const order = StorageManager.getOrder();
+    console.log('Order Manager: Заказ из хранилища:', order);
     
-    // Добавляем обработчики событий для кнопок
+    // Заполняем выбранные блюда
+    Object.keys(order).forEach(category => {
+        const keyword = order[category];
+        if (keyword) {
+            const dish = dishes.find(d => d.keyword === keyword);
+            if (dish) {
+                window.selectedDishes[category] = dish;
+                console.log(`Order Manager: Найдено блюдо для ${category}:`, dish.name);
+                highlightDishCard(dish);
+            } else {
+                console.warn(`Order Manager: Блюдо с keyword "${keyword}" не найдено в массиве dishes`);
+            }
+        }
+    });
+}
+
+function highlightDishCard(dish) {
+    if (!dish || !dish.keyword) return;
+    
+    const card = document.querySelector(`[data-dish="${dish.keyword}"]`);
+    if (card) {
+        card.classList.add('selected');
+        console.log(`Order Manager: Выделена карточка: ${dish.name}`);
+    } else {
+        console.warn(`Order Manager: Карточка для блюда "${dish.keyword}" не найдена на странице`);
+    }
+}
+
+function setupEventListeners() {
+    // Обработчик кликов по кнопкам "Добавить"
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('dish-button')) {
             const dishCard = e.target.closest('.dish-card');
-            const dishKeyword = dishCard.getAttribute('data-dish');
-            const dish = dishes.find(d => d.keyword === dishKeyword);
+            if (!dishCard) return;
             
+            const dishKeyword = dishCard.getAttribute('data-dish');
+            if (!dishKeyword) return;
+            
+            const dish = dishes.find(d => d.keyword === dishKeyword);
             if (dish) {
                 selectDish(dish);
+            } else {
+                console.error('Order Manager: Блюдо не найдено по keyword:', dishKeyword);
             }
         }
     });
     
-    // Обработчик изменения радиокнопок времени доставки
-    document.addEventListener('change', function(e) {
-        if (e.target.name === 'deliveryTime') {
-            toggleTimeInput();
-        }
+    // Обработчик обновления заказа из других вкладок
+    window.addEventListener('orderUpdated', function() {
+        console.log('Order Manager: Событие orderUpdated получено');
+        loadSelectedDishesFromStorage();
+        updateOrderPanel();
     });
     
-    function selectDish(dish) {
-        // Снимаем выделение со всех карточек в этой категории
-        const categoryCards = document.querySelectorAll(`[data-dish]`);
-        categoryCards.forEach(card => {
-            const cardDish = dishes.find(d => d.keyword === card.getAttribute('data-dish'));
-            if (cardDish && cardDish.category === dish.category) {
-                card.classList.remove('selected');
-            }
-        });
-        
-        // Выделяем выбранную карточку (если она видима)
-        const selectedCard = document.querySelector(`[data-dish="${dish.keyword}"]`);
-        if (selectedCard && selectedCard.style.display !== 'none') {
-            selectedCard.classList.add('selected');
+    // Обработчик кликов по фильтрам (чтобы обновить выделение после фильтрации)
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('filter-btn')) {
+            // Небольшая задержка для применения фильтра
+            setTimeout(() => {
+                Object.values(window.selectedDishes).forEach(dish => {
+                    if (dish) highlightDishCard(dish);
+                });
+            }, 50);
         }
-        
-        // Сохраняем выбранное блюдо
-        // Используем квадратные скобки для доступа к свойству с дефисом
-        window.selectedDishes[dish.category] = dish;
-        
-        // Обновляем отображение заказа
-        updateOrderDisplay();
-        updateTotalPrice();
-        updateFormData();
+    });
+}
+
+function selectDish(dish) {
+    console.log('Order Manager: Выбрано блюдо:', dish.name, 'категория:', dish.category);
+    
+    // Определяем категорию для хранения
+    let storageCategory = dish.category;
+    if (dish.category === 'salad') {
+        storageCategory = 'starter';
+    } else if (dish.category === 'main') {
+        storageCategory = 'main-course';
     }
     
-    function initOrderSection() {
-        // Создаем секцию заказа
-        const orderSection = document.createElement('section');
-        orderSection.id = 'order';
-        orderSection.className = 'menu-section';
-        orderSection.innerHTML = `
-            <div class="container menu-container">
-                <header class="menu-section_header">
-                    <h2 class="menu-title">Ваш заказ</h2>
-                </header>
-                <div class="order-content">
-                    <div id="order-items">
-                        <p class="no-selection">Ничего не выбрано</p>
-                    </div>
-                    <div id="order-total" class="order-total" style="display: none;">
-                        <h3 class="total-title">Стоимость заказа</h3>
-                        <p class="total-price">0₽</p>
-                    </div>
-                    <form id="order-form" class="order-form" action="https://httpbingo.org/post" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
-                        <div class="form-group">
-                            <label for="customer-name">Ваше имя</label>
-                            <input id="customer-name" name="customerName" type="text" placeholder="Иван Иванов" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-phone">Телефон</label>
-                            <input id="customer-phone" name="customerPhone" type="tel" placeholder="+7 (999) 999-99-99" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customer-email">Email</label>
-                            <input id="customer-email" name="customerEmail" type="email" placeholder="name@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="receiveOffers"> Получать информацию о скидках и акциях
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="delivery-address">Адрес доставки</label>
-                            <input id="delivery-address" name="deliveryAddress" type="text" placeholder="ул. Примерная, д. 1" required>
-                            <p style="font-size: 14px; color: #707070; margin: 4px 0 0 0;">Доставка осуществляется только по Москве</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="delivery-comment">Комментарий к заказу</label>
-                            <textarea id="delivery-comment" name="deliveryComment" rows="3" placeholder="Дополнительные пожелания к заказу"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Время доставки</label>
-                            <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
-                                <label class="radio-option">
-                                    <input type="radio" name="deliveryTime" value="asap" checked> Как можно быстрее
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="deliveryTime" value="specified"> К указанному времени
-                                </label>
-                            </div>
-                            <div id="time-input-container" class="time-input-container" style="display: none;">
-                                <label for="delivery-time">Укажите время доставки</label>
-                                <input id="delivery-time" name="deliveryTimeValue" type="time" min="09:00" max="22:00" style="margin-top: 8px;">
-                                <p style="font-size: 14px; color: #707070; margin: 4px 0 0 0;">Доставка доступна с 09:00 до 22:00</p>
-                            </div>
-                        </div>
-                        <input type="hidden" name="selectedDishesKeywords" id="selected-dishes-keywords">
-                        <input type="hidden" name="totalPrice" id="total-price">
-                        <button type="submit" class="primary-button">Оформить заказ</button>
-                    </form>
+    // Снимаем выделение со всех карточек в этой категории
+    const categoryCards = document.querySelectorAll(`.dish-card[data-category="${dish.category}"]`);
+    categoryCards.forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    // Выделяем выбранную карточку
+    const selectedCard = document.querySelector(`[data-dish="${dish.keyword}"]`);
+    if (selectedCard) {
+        selectedCard.classList.add('selected');
+    }
+    
+    // Сохраняем в хранилище
+    StorageManager.saveDish(dish.category, dish);
+    
+    // Обновляем глобальную переменную
+    window.selectedDishes[storageCategory] = dish;
+    
+    // Обновляем панель
+    updateOrderPanel();
+}
+
+function initOrderPanel() {
+    console.log('Order Manager: Инициализация панели заказа');
+    
+    // Удаляем старую секцию заказа, если она есть
+    const oldOrderSection = document.getElementById('order');
+    if (oldOrderSection) {
+        oldOrderSection.remove();
+    }
+    
+    // Проверяем, не создана ли уже панель
+    if (document.getElementById('order-panel')) {
+        console.log('Order Manager: Панель уже существует');
+        return;
+    }
+    
+    // Создаем новую панель заказа
+    const orderPanel = document.createElement('section');
+    orderPanel.id = 'order-panel';
+    orderPanel.className = 'order-panel';
+    orderPanel.innerHTML = `
+        <div class="container">
+            <div class="order-panel-content">
+                <div class="order-panel-summary">
+                    <h3>Ваш заказ</h3>
+                    <p id="order-panel-total">0₽</p>
                 </div>
+                <a id="checkout-link" href="./checkout.html" class="primary-button checkout-button" disabled>
+                    Перейти к оформлению
+                </a>
             </div>
-        `;
-        
-        // Вставляем перед комбо-секцией
-        const comboSection = document.querySelector('#special');
-        if (comboSection) {
-            comboSection.parentNode.insertBefore(orderSection, comboSection);
-        }
-        
-        // Добавляем обработчик отправки формы
-        document.getElementById('order-form').addEventListener('submit', function(e) {
-            updateFormData();
-        });
-        
-        // Инициализируем состояние поля времени
-        toggleTimeInput();
-    }
+        </div>
+    `;
     
-    function toggleTimeInput() {
-        const timeInputContainer = document.getElementById('time-input-container');
-        const specifiedTimeRadio = document.querySelector('input[name="deliveryTime"][value="specified"]');
-        
-        if (specifiedTimeRadio && specifiedTimeRadio.checked) {
-            timeInputContainer.style.display = 'block';
-            // Устанавливаем минимальное время - текущее время + 1 час
-            setMinDeliveryTime();
-        } else {
-            timeInputContainer.style.display = 'none';
+    // Вставляем перед комбо-секцией
+    const comboSection = document.querySelector('#special');
+    if (comboSection) {
+        comboSection.parentNode.insertBefore(orderPanel, comboSection);
+        console.log('Order Manager: Панель создана перед комбо-секцией');
+    } else {
+        // Если нет комбо-секции, вставляем в конец main
+        const main = document.querySelector('main');
+        if (main) {
+            main.appendChild(orderPanel);
+            console.log('Order Manager: Панель добавлена в конец main');
         }
     }
+}
+
+function updateOrderPanel() {
+    const panel = document.getElementById('order-panel');
+    const totalElement = document.getElementById('order-panel-total');
+    const link = document.getElementById('checkout-link');
     
-    function setMinDeliveryTime() {
-        const timeInput = document.getElementById('delivery-time');
-        const now = new Date();
-        const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-        
-        // Форматируем время в формат HH:MM
-        const hours = oneHourLater.getHours().toString().padStart(2, '0');
-        const minutes = oneHourLater.getMinutes().toString().padStart(2, '0');
-        const minTime = `${hours}:${minutes}`;
-        
-        timeInput.min = minTime;
-        
-        // Устанавливаем значение по умолчанию - ближайшее доступное время
-        if (!timeInput.value) {
-            timeInput.value = minTime;
-        }
+    if (!panel || !totalElement || !link) {
+        console.warn('Order Manager: Элементы панели не найдены');
+        return;
     }
     
-    function updateOrderDisplay() {
-        const orderItems = document.getElementById('order-items');
-        const orderTotal = document.getElementById('order-total');
-        const hasSelectedDishes = Object.values(window.selectedDishes).some(dish => dish !== null);
-        
-        if (!hasSelectedDishes) {
-            orderItems.innerHTML = '<p class="no-selection">Ничего не выбрано</p>';
-            orderTotal.style.display = 'none';
-            return;
-        }
-        
-        let orderHTML = '';
-        
-        // Супы
-        if (window.selectedDishes.soup) {
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Суп</h3>
-                    <p class="selected-dish">${window.selectedDishes.soup.name} - ${window.selectedDishes.soup.price}₽</p>
-                </div>
-            `;
-        }
-        
-        // Стартеры (салаты)
-        if (window.selectedDishes.starter) {
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Салат</h3>
-                    <p class="selected-dish">${window.selectedDishes.starter.name} - ${window.selectedDishes.starter.price}₽</p>
-                </div>
-            `;
-        }
-        
-        // Горячие блюда (main-course)
-        if (window.selectedDishes['main-course']) { // ИЗМЕНЕНО: доступ через квадратные скобки
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Главное блюдо</h3>
-                    <p class="selected-dish">${window.selectedDishes['main-course'].name} - ${window.selectedDishes['main-course'].price}₽</p>
-                </div>
-            `;
-        }
-        
-        // Напитки
-        if (window.selectedDishes.drink) {
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Напиток</h3>
-                    <p class="selected-dish">${window.selectedDishes.drink.name} - ${window.selectedDishes.drink.price}₽</p>
-                </div>
-            `;
-        }
-        
-        // Десерты
-        if (window.selectedDishes.dessert) {
-            orderHTML += `
-                <div class="order-category">
-                    <h3 class="category-title">Десерт</h3>
-                    <p class="selected-dish">${window.selectedDishes.dessert.name} - ${window.selectedDishes.dessert.price}₽</p>
-                </div>
-            `;
-        }
-        
-        orderItems.innerHTML = orderHTML;
-        orderTotal.style.display = 'block';
-    }
+    const selectedCount = StorageManager.getSelectedCount();
+    const total = calculateTotalPrice();
     
-    function updateTotalPrice() {
-        const totalElement = document.querySelector('.total-price');
-        let total = 0;
-        
-        Object.values(window.selectedDishes).forEach(dish => {
-            if (dish) {
-                total += dish.price;
-            }
-        });
-        
+    console.log('Order Manager: Обновление панели. Выбрано:', selectedCount, 'Сумма:', total);
+    
+    if (selectedCount > 0) {
+        panel.style.display = 'block';
         totalElement.textContent = `${total}₽`;
-    }
-    
-    function updateFormData() {
-        const selectedDishesArray = Object.values(window.selectedDishes).filter(dish => dish !== null);
         
-        // Ключи блюд на латинице
-        const selectedKeywords = selectedDishesArray
-            .map(dish => dish.keyword)
-            .join(',');
+        // Проверка валидности комбо
+        const selectedCategories = StorageManager.getSelectedCategories();
+        console.log('Order Manager: Выбранные категории для валидации:', selectedCategories);
         
-        document.getElementById('selected-dishes-keywords').value = selectedKeywords;
-        document.getElementById('total-price').value = calculateTotalPrice();
+        const isValid = isValidCombination(selectedCategories);
+        console.log('Order Manager: Комбо валидно:', isValid);
         
-        // Валидация времени доставки
-        const specifiedTimeRadio = document.querySelector('input[name="deliveryTime"][value="specified"]');
-        const timeInput = document.getElementById('delivery-time');
-        
-        if (specifiedTimeRadio && specifiedTimeRadio.checked && !timeInput.value) {
-            alert('Пожалуйста, укажите время доставки');
-            return false;
+        if (isValid) {
+            link.removeAttribute('disabled');
+            link.classList.remove('disabled');
+            link.title = '';
+        } else {
+            link.setAttribute('disabled', 'disabled');
+            link.classList.add('disabled');
+            
+            // Показываем подсказку, что не так
+            const missingInfo = getMissingItems(selectedCategories);
+            link.title = missingInfo.message || 'Состав заказа не соответствует доступным комбо';
         }
+    } else {
+        panel.style.display = 'none';
     }
-    
-    function calculateTotalPrice() {
-        let total = 0;
-        Object.values(window.selectedDishes).forEach(dish => {
-            if (dish) total += dish.price;
-        });
-        return total;
-    }
-});
+}
+
+function calculateTotalPrice() {
+    let total = 0;
+    Object.values(window.selectedDishes).forEach(dish => {
+        if (dish && dish.price) {
+            total += parseInt(dish.price) || 0;
+        }
+    });
+    return total;
+}
+
+// Делаем функции доступными для других скриптов
+window.updateOrderPanel = updateOrderPanel;

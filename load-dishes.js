@@ -1,10 +1,18 @@
 // load-dishes.js - функция для загрузки блюд с API
+let dishesLoaded = false;
+
 async function loadDishes() {
-    console.log('Начинаю загрузку блюд с API...');
+    console.log('loadDishes: Начинаю загрузку блюд с API...');
+    
+    // Если уже загружены, возвращаем
+    if (dishesLoaded && window.dishes && window.dishes.length > 0) {
+        console.log('loadDishes: Блюда уже загружены');
+        return window.dishes;
+    }
     
     try {
         const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
-        console.log('Запрос к:', apiUrl);
+        console.log('loadDishes: Запрос к:', apiUrl);
         
         const response = await fetch(apiUrl);
         
@@ -13,12 +21,10 @@ async function loadDishes() {
         }
         
         const data = await response.json();
-        console.log('Получено блюд:', data.length);
+        console.log('loadDishes: Получено блюд:', data.length);
         
-        // ВАЖНО: Анализируем ВСЕ категории и их синонимы
-        console.log('=== ПОЛНЫЙ АНАЛИЗ ДАННЫХ ===');
-        
-        // Собираем все уникальные категории
+        // Анализируем данные
+        console.log('loadDishes: === ПОЛНЫЙ АНАЛИЗ ДАННЫХ ===');
         const allCategories = {};
         data.forEach((dish, index) => {
             const cat = dish.category;
@@ -28,87 +34,97 @@ async function loadDishes() {
                 }
                 allCategories[cat].push(dish.name);
             }
-            // Первые 5 блюд для примера
-            if (index < 5) {
-                console.log(`${dish.name}: category="${dish.category}", kind="${dish.kind}", keyword="${dish.keyword}"`);
+            // Первые 3 блюда для примера
+            if (index < 3) {
+                console.log(`loadDishes: Пример: ${dish.name}: category="${dish.category}", keyword="${dish.keyword}"`);
             }
         });
         
-        console.log('=== КАТЕГОРИИ И КОЛИЧЕСТВО ===');
+        console.log('loadDishes: === КАТЕГОРИИ И КОЛИЧЕСТВО ===');
         Object.keys(allCategories).forEach(cat => {
-            console.log(`"${cat}": ${allCategories[cat].length} блюд`);
-            console.log(`  Примеры: ${allCategories[cat].slice(0, 3).join(', ')}`);
+            console.log(`loadDishes: "${cat}": ${allCategories[cat].length} блюд`);
         });
         
         // ЗАПОЛНЯЕМ глобальный массив dishes
-        dishes.length = 0;
-        dishes.push(...data);
+        if (!window.dishes) {
+            window.dishes = [];
+        }
+        window.dishes.length = 0;
+        window.dishes.push(...data);
+        dishesLoaded = true;
         
-        console.log('Блюда успешно загружены в массив dishes');
-        return dishes;
+        console.log('loadDishes: Блюда успешно загружены в глобальный массив dishes');
+        return window.dishes;
         
     } catch (error) {
-        console.error('Ошибка загрузки:', error);
+        console.error('loadDishes: Ошибка загрузки:', error);
         
-        // Тестовые данные с правильными категориями
-        console.log('Использую тестовые данные...');
+        // Тестовые данные для отладки
+        console.log('loadDishes: Использую тестовые данные...');
         
         const testDishes = [
-            // Супы
             {
-                keyword: 'gaspacho',
-                name: 'Гаспачо',
-                price: 195,
+                keyword: 'pumpkin-soup',
+                name: 'Тыквенный крем-суп',
+                price: 320,
                 category: 'soup',
-                count: '350 г',
-                image: 'http://lab7-api.std-900.ist.mospolytech.ru/images/soups/gazpacho',
-                kind: 'veg'
+                count: '250 мл',
+                image: 'images/soup-pumpkin.svg',
+                kind: 'veg',
+                id: 1
             },
-            // Стартеры
             {
-                keyword: 'caesar',
+                keyword: 'caesar-salad',
                 name: 'Цезарь с курицей',
                 price: 320,
                 category: 'salad',
-                count: '250 г',
-                image: 'http://lab7-api.std-900.ist.mospolytech.ru/images/salads/caesar',
-                kind: 'meat'
+                count: '240 г',
+                image: 'images/starter-caesar.jpg',
+                kind: 'meat',
+                id: 7
             },
-            // Горячие блюда
             {
-                keyword: 'lasagna',
-                name: 'Лазанья',
-                price: 385,
-                category: 'hot',
-                count: '350 г',
-                image: 'http://lab7-api.std-900.ist.mospolytech.ru/images/hot/lasagna',
-                kind: 'meat'
+                keyword: 'beef',
+                name: 'Говяжьи щёчки с пюре',
+                price: 480,
+                category: 'main',
+                count: '310 г',
+                image: 'images/main-beef.svg',
+                kind: 'meat',
+                id: 15
             },
-            // Напитки
             {
-                keyword: 'tea',
-                name: 'Чай',
-                price: 100,
+                keyword: 'blueberry',
+                name: 'Черничный морс',
+                price: 150,
                 category: 'drink',
                 count: '250 мл',
-                image: 'http://lab7-api.std-900.ist.mospolytech.ru/images/drinks/tea',
-                kind: 'hot'
+                image: 'images/drink-blueberry.svg',
+                kind: 'cold',
+                id: 19
             },
-            // Десерты
             {
                 keyword: 'tiramisu',
                 name: 'Тирамису',
                 price: 280,
                 category: 'dessert',
                 count: '150 г',
-                image: 'http://lab7-api.std-900.ist.mospolytech.ru/images/desserts/tiramisu',
-                kind: 'medium'
+                image: 'images/dessert-tiramisu.jpg',
+                kind: 'medium',
+                id: 25
             }
         ];
         
-        dishes.length = 0;
-        dishes.push(...testDishes);
+        if (!window.dishes) {
+            window.dishes = [];
+        }
+        window.dishes.length = 0;
+        window.dishes.push(...testDishes);
+        dishesLoaded = true;
         
-        return dishes;
+        return window.dishes;
     }
 }
+
+// Делаем функцию доступной глобально
+window.loadDishes = loadDishes;

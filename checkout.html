@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./lunch.css">
+    <link rel="stylesheet" href="./checkout.css">
+    <title>Food Construct — Оформить заказ</title>
+</head>
+<body class="page-body">
+<header class="site-header">
+    <div class="container header-container">
+        <h1 class="header_text">Food Construct</h1>
+        <nav class="header_nav">
+            <ul class="header_menu">
+                <li class="header_item"><a class="nav_link" href="./index.html">Главная</a></li>
+                <li class="header_item"><a class="nav_link" href="./lunch.html">Собрать ланч</a></li>
+                <li class="header_item"><a class="nav_link active" href="./checkout.html">Оформить заказ</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="page-main">
+    <div class="container checkout-container">
+        <!-- Состав заказа -->
+        <section id="order-summary" class="checkout-section">
+            <div class="section-header">
+                <h2>Состав заказа</h2>
+            </div>
+            <div class="section-content">
+                <div id="checkout-items">
+                    <!-- Динамически заполнится через JS -->
+                    <div class="empty-state">
+                        <p>Ничего не выбрано. Чтобы добавить блюда в заказ, 
+                        перейдите на страницу <a href="./lunch.html" class="link-button">Собрать ланч</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма оформления -->
+        <section id="checkout-form-section" class="checkout-section">
+            <div class="section-header">
+                <h2>Оформление заказа</h2>
+            </div>
+            <div class="section-content">
+                <div class="checkout-layout">
+                    <!-- Левая колонка с выбранными блюдами -->
+                    <div class="order-sidebar">
+                        <div class="sidebar-card">
+                            <h3 class="sidebar-title">Ваш заказ</h3>
+                            <div id="selected-dishes-list" class="selected-dishes-list">
+                                <!-- Заполнится динамически -->
+                            </div>
+                            <div class="order-total-card">
+                                <div class="total-row">
+                                    <span>Итого:</span>
+                                    <span id="checkout-total-price" class="total-price">0₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Правая колонка с формой -->
+                    <div class="checkout-form-wrapper">
+                        <form id="checkout-form" class="order-form" action="https://httpbingo.org/post" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+                            <div class="form-group">
+                                <label for="customer-name">Ваше имя</label>
+                                <input id="customer-name" name="full_name" type="text" placeholder="Иван Иванов" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-phone">Телефон</label>
+                                <input id="customer-phone" name="phone" type="tel" placeholder="+7 (999) 999-99-99" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-email">Email</label>
+                                <input id="customer-email" name="email" type="email" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="subscribe" value="1"> Получать информацию о скидках и акциях
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-address">Адрес доставки</label>
+                                <input id="delivery-address" name="delivery_address" type="text" placeholder="ул. Примерная, д. 1" required>
+                                <p class="form-hint">Доставка осуществляется только по Москве</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery-comment">Комментарий к заказу</label>
+                                <textarea id="delivery-comment" name="comment" rows="3" placeholder="Дополнительные пожелания к заказу"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Время доставки</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="delivery_type" value="now" checked> Как можно быстрее
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="delivery_type" value="by_time"> К указанному времени
+                                    </label>
+                                </div>
+                                <div id="time-input-container" class="time-input-container" style="display: none;">
+                                    <label for="delivery-time">Укажите время доставки</label>
+                                    <input id="delivery-time" name="delivery_time" type="time" min="07:00" max="23:00" step="300" style="margin-top: 8px;">
+                                    <p class="form-hint">Доставка доступна с 07:00 до 23:00 с шагом 5 минут</p>
+                                </div>
+                            </div>
+                            <input type="hidden" name="student_id" id="student-id" value="123456">
+                            <button type="submit" class="primary-button submit-button">Отправить заказ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-container">
+        <p class="footer_text">Позвонить нам +7 800 000-00-00 • Москва, ул. Ланчей, 12</p>
+    </div>
+</footer>
+
+<script src="dishes.js"></script>
+<script src="load-dishes.js"></script> <!-- Теперь dishes загружаются тут -->
+<script src="storage-manager.js"></script>
+<script src="order-validation.js"></script> <!-- Важно: перед checkout-manager.js -->
+<script src="checkout-manager.js"></script>
+<script src="api-service.js"></script>
+
+<script>
+    // Проверяем загрузку
+    console.log('checkout.html: Все скрипты загружены');
+    console.log('window.dishes существует:', typeof window.dishes !== 'undefined');
+    console.log('window.dishes длина:', window.dishes ? window.dishes.length : 'нет');
+</script>
+</body>
+</html>

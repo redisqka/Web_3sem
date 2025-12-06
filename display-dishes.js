@@ -22,10 +22,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log('Все категории из API:', allCategories);
         
         // ОТОБРАЖАЕМ КАТЕГОРИИ С ПРАВИЛЬНЫМИ НАЗВАНИЯМИ
-        // Теперь мы знаем точные названия:
         displayCategory('soup', '#soups .dish-grid', 'Супы');
         displayCategory('salad', '#starters .dish-grid', 'Салаты');
-        displayCategory('main-course', '#mains .dish-grid', 'Горячие блюда'); // ВАЖНО: main-course, а не main!
+        displayCategory('main-course', '#mains .dish-grid', 'Горячие блюда');
         displayCategory('drink', '#drinks .dish-grid', 'Напитки');
         displayCategory('dessert', '#desserts .dish-grid', 'Десерты');
         
@@ -75,6 +74,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         article.className = 'dish-card';
         article.setAttribute('data-dish', dish.keyword || 'unknown');
         article.setAttribute('data-kind', dish.kind || 'all');
+        article.setAttribute('data-category', dish.category || 'unknown');
+        
+        // Проверяем, выбрано ли это блюдо в localStorage
+        const order = StorageManager.getOrder();
+        const isSelected = order[dish.category] === dish.keyword;
+        
+        if (isSelected) {
+            article.classList.add('selected');
+        }
         
         // Используем изображение из API
         let imageUrl = dish.image;
@@ -102,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         const colors = {
             'soup': 'FF6347',        // tomato
             'salad': '32CD32',       // limegreen
-            'main-course': '1E90FF', // dodgerblue - ВАЖНО: main-course!
+            'main-course': '1E90FF', // dodgerblue
             'drink': '9370DB',       // mediumpurple
             'dessert': 'FF69B4'      // hotpink
         };
