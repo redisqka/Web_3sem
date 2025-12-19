@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Construct — Доставка бизнес-ланчей</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    
+    <style>
+        :root {
+            --primary-color: #FF6347;
+            --primary-light: rgba(255, 99, 71, 0.1);
+            --dark-color: #2d2d2d;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+        }
+        
+    
+        .landing-body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-color);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #ffe1d5 0%, #ffc6b0 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="white" opacity="0.1"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #5a2d22;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content .lead {
+            font-size: 1.25rem;
+            color: #7a4c1c;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 99, 71, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 99, 71, 0.1);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(255, 99, 71, 0.9), rgba(255, 99, 71, 0.95)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section .lead {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form .form-control {
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(255, 99, 71, 0.25);
+        }
+        
+        .contact-info {
+            padding: 2.5rem;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .landing-footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section {
+                padding: 60px 0;
+            }
+            
+            .features-section,
+            .cta-section,
+            .contact-section {
+                padding: 60px 0;
+            }
+            
+            .hero-image {
+                margin-top: 2rem;
+                transform: none;
+            }
+            
+            .contact-form,
+            .contact-info {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="landing-body">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">
+                <span style="color: var(--primary-color);">Food</span>Construct
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cta">Собрать ланч</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-outline-primary" href="./lunch.html">Заказать</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold">Свежие бизнес-ланчи с доставкой в офис</h1>
+                        <p class="lead">Ежедневная доставка вкусных и полезных обедов для вашей команды. Собирайте идеальный ланч из 50+ позиций меню.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#cta" class="btn btn-primary btn-lg px-4 py-3">
+                                <i class="bi bi-play-circle me-2"></i>Собрать ланч
+                            </a>
+                            <a href="#features" class="btn btn-outline-primary btn-lg px-4 py-3">
+                                <i class="bi bi-info-circle me-2"></i>Узнать больше
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Доставка бизнес-ланчей" 
+                         class="hero-image img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Почему выбирают FoodConstruct</h2>
+                <p class="lead text-muted">Мы делаем бизнес-ланчи удобными, вкусными и полезными</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-clock"></i>
+                        </div>
+                        <h3>Привозим вовремя</h3>
+                        <p class="text-muted">Гарантированная доставка к назначенному времени. Никаких опозданий — только горячие обеды.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-egg-fried"></i>
+                        </div>
+                        <h3>Свежие продукты</h3>
+                        <p class="text-muted">Готовим только из свежих продуктов каждый день. Никаких полуфабрикатов и заморозки.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h3>Гибкий выбор</h3>
+                        <p class="text-muted">Более 50 блюд на выбор: супы, салаты, горячее, напитки и десерты. Собирайте идеальный обед.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h3>Бесплатная доставка</h3>
+                        <p class="text-muted">Доставка по Москве бесплатно при заказе от 5 ланчей. Индивидуальные условия для офисов.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-recycle"></i>
+                        </div>
+                        <h3>Эко-упаковка</h3>
+                        <p class="text-muted">Используем только биоразлагаемую упаковку. Заботимся о вкусе вашего обеда и природе.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h3>Поддержка 24/7</h3>
+                        <p class="text-muted">Наш менеджер всегда на связи. Поможем с выбором, изменим заказ или решим любой вопрос.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 fw-bold mb-4">Соберите свой идеальный бизнес-ланч за 5 минут</h2>
+                    <p class="lead mb-5">Выбирайте из супов, салатов, горячих блюд, напитков и десертов. Мы приготовим и доставим в удобное время прямо в офис.</p>
+                    <a href="./lunch.html" class="cta-button btn">
+                        <i class="bi bi-arrow-right-circle me-2"></i>Начать сборку ланча
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Остались вопросы? Напишите нам!</h2>
+                <p class="lead text-muted">Мы поможем подобрать оптимальный вариант для вашего офиса</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <div class="contact-form">
+                        <form id="landing-contact-form" action="https://httpbingo.org/post" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Ваше имя</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="company" class="form-label">Компания</label>
+                                        <input type="text" class="form-control" id="company" name="company">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Телефон</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Сообщение</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Расскажите о потребностях вашего офиса..."></textarea>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="consent" required>
+                                <label class="form-check-label" for="consent">
+                                    Согласен на обработку персональных данных
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3">
+                                <i class="bi bi-send me-2"></i>Отправить заявку
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5">
+                    <div class="contact-info">
+                        <h3 class="mb-4">Контакты</h3>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Адрес офиса</h5>
+                                <p class="text-muted mb-0">Москва, ул. Ланчей, 12</p>
+                                <p class="text-muted">Бизнес-центр "Фудплаза"</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div>
+                                <h5>Телефон</h5>
+                                <p class="text-muted mb-0">+7 (800) 000-00-00</p>
+                                <p class="text-muted">Ежедневно с 7:00 до 23:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p class="text-muted mb-0">hello@foodconstruct.ru</p>
+                                <p class="text-muted">Для предложений и вопросов</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Время работы</h5>
+                                <p class="text-muted mb-0">Пн-Пт: 7:00 - 23:00</p>
+                                <p class="text-muted">Сб-Вс: 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h3 class="fw-bold mb-3">
+                        <span style="color: var(--primary-color);">Food</span>Construct
+                    </h3>
+                    <p class="mb-0">Доставка бизнес-ланчей в Москве с 2018 года. Свежая еда, вовремя и с заботой о клиентах.</p>
+                </div>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="d-flex justify-content-lg-end gap-3">
+                        <a href="#" class="text-white me-3">
+                            <i class="bi bi-facebook fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white me-3">
+                            <i class="bi bi-instagram fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white me-3">
+                            <i class="bi bi-telegram fs-4"></i>
+                        </a>
+                        <a href="#" class="text-white">
+                            <i class="bi bi-whatsapp fs-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 opacity-25">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 FoodConstruct. Все права защищены.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="./index.html" class="text-white me-3">Основной сайт</a>
+                    <a href="./lunch.html" class="text-white me-3">Собрать ланч</a>
+                    <a href="./checkout.html" class="text-white">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Обработка формы
+        document.getElementById('landing-contact-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Показываем состояние загрузки
+            submitButton.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Отправка...';
+            submitButton.disabled = true;
+            
+            // Имитация отправки
+            setTimeout(() => {
+                alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в течение часа.');
+                form.reset();
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Прокручиваем к началу формы
+                window.scrollTo({
+                    top: form.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }, 1500);
+        });
+        
+        // Анимация при скролле
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }, observerOptions);
+        
+        // Наблюдаем за карточками преимуществ
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</body>
+</html>
