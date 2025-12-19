@@ -1,9 +1,8 @@
-// orders-manager-fixed.js - РАБОЧИЙ ВАРИАНТ
 class OrdersManager {
     constructor() {
         this.orders = [];
         this.currentOrderId = null;
-        this.dishes = [];
+        this.allDishes = [];
     }
 
     async loadOrders() {
@@ -11,7 +10,7 @@ class OrdersManager {
         
         try {
             // Загружаем блюда
-            this.loadDishes();
+            await this.loadAllDishes();
             
             // Загружаем заказы через ApiService
             const ordersFromApi = await ApiService.getOrders();
@@ -24,7 +23,6 @@ class OrdersManager {
             this.orders = this.removeDuplicates(allOrders);
             
             console.log(`✅ Всего заказов: ${this.orders.length}`);
-            console.log('📋 Заказы:', this.orders);
             
             this.renderOrders();
             
@@ -34,12 +32,61 @@ class OrdersManager {
         }
     }
     
+    async loadAllDishes() {
+        console.log('🔄 Загрузка блюд...');
+        
+        // Если уже загружены
+        if (this.allDishes.length > 0) {
+            console.log('✅ Блюда уже загружены');
+            return this.allDishes;
+        }
+        
+        // Пробуем получить из window.dishes
+        if (window.dishes && Array.isArray(window.dishes) && window.dishes.length > 0) {
+            console.log('✅ Блюда из window.dishes:', window.dishes.length);
+            this.allDishes = window.dishes;
+            return this.allDishes;
+        }
+        
+        try {
+            // Загружаем с API
+            const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+            console.log('📡 Запрос к API:', apiUrl);
+            
+            const response = await fetch(apiUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log(`✅ Получено блюд с API: ${data.length}`);
+            
+            // Сохраняем в локальное свойство
+            this.allDishes = data;
+            
+            // Также сохраняем в window для других скриптов
+            window.dishes = data;
+            
+            return this.allDishes;
+            
+        } catch (error) {
+            console.error('❌ Ошибка загрузки блюд с API:', error);
+            
+            // Если не удалось загрузить блюда, продолжаем без них
+            console.log('⚠️ Блюда не загружены, будут отображаться ID');
+            this.allDishes = [];
+            window.dishes = [];
+            
+            return this.allDishes;
+        }
+    }
+    
     removeDuplicates(orders) {
         const unique = [];
         const seen = new Set();
         
         orders.forEach(order => {
-            // Преобразуем ID к строке для сравнения
             const orderId = String(order.id);
             if (!seen.has(orderId)) {
                 seen.add(orderId);
@@ -53,31 +100,6 @@ class OrdersManager {
             const dateB = new Date(b.created_at || 0);
             return dateB - dateA;
         });
-    }
-
-    loadDishes() {
-        // Простые блюда для отображения
-        this.dishes = [
-            { id: 1, name: 'Тыквенный суп', price: 320 },
-            { id: 2, name: 'Минестроне', price: 280 },
-            { id: 3, name: 'Том Ям', price: 365 },
-            { id: 4, name: 'Борщ', price: 250 },
-            { id: 5, name: 'Куриный суп', price: 240 },
-            { id: 6, name: 'Цезарь с курицей', price: 320 },
-            { id: 7, name: 'Греческий салат', price: 280 },
-            { id: 8, name: 'Брускетта', price: 220 },
-            { id: 9, name: 'Паста', price: 420 },
-            { id: 10, name: 'Курица', price: 380 },
-            { id: 11, name: 'Говядина', price: 480 },
-            { id: 12, name: 'Лосось', price: 450 },
-            { id: 13, name: 'Морс', price: 150 },
-            { id: 14, name: 'Апельсиновый сок', price: 160 },
-            { id: 15, name: 'Капучино', price: 200 },
-            { id: 16, name: 'Чай', price: 100 },
-            { id: 17, name: 'Тирамису', price: 280 },
-            { id: 18, name: 'Чизкейк', price: 320 },
-            { id: 19, name: 'Фрукты', price: 220 }
-        ];
     }
 
     renderOrders() {
@@ -116,7 +138,6 @@ class OrdersManager {
             const total = this.calculateTotal(order);
             const delivery = this.formatDeliveryTime(order);
             
-            // ВАЖНО: используем String() для ID
             const orderId = String(order.id);
             
             html += `
@@ -147,29 +168,28 @@ class OrdersManager {
 
     getDishesText(order) {
         const dishes = [];
-        if (order.soup_id) dishes.push(this.getDishName(order.soup_id));
-        if (order.salad_id) dishes.push(this.getDishName(order.salad_id));
-        if (order.main_course_id) dishes.push(this.getDishName(order.main_course_id));
-        if (order.drink_id) dishes.push(this.getDishName(order.drink_id));
-        if (order.dessert_id) dishes.push(this.getDishName(order.dessert_id));
+        if (order.soup_id) dishes.push(this.getDishNameById(order.soup_id));
+        if (order.salad_id) dishes.push(this.getDishNameById(order.salad_id));
+        if (order.main_course_id) dishes.push(this.getDishNameById(order.main_course_id));
+        if (order.drink_id) dishes.push(this.getDishNameById(order.drink_id));
+        if (order.dessert_id) dishes.push(this.getDishNameById(order.dessert_id));
         
         if (dishes.length === 0) return '—';
         
         const text = dishes.join(', ');
-        return text.length > 50 ? text.substring(0, 47) + '...' : text;
+        return text.length > 150 ? text.substring(0, 47) + '...' : text;
     }
 
-    getDishName(dishId) {
-        // Ищем в блюдах
-        const dish = this.dishes.find(d => d.id == dishId);
-        if (dish) return dish.name;
+    getDishNameById(dishId) {
+        if (!dishId) return '';
         
-        // Ищем в глобальных блюдах
-        if (window.dishes) {
-            const globalDish = window.dishes.find(d => d.id == dishId);
-            if (globalDish) return globalDish.name;
+        // Ищем в загруженных блюдах
+        const dish = this.allDishes.find(d => d.id == dishId);
+        if (dish && dish.name) {
+            return dish.name;
         }
         
+        // Если блюдо не найдено в массиве, возвращаем ID
         return `Блюдо #${dishId}`;
     }
 
@@ -178,8 +198,11 @@ class OrdersManager {
         
         // Ищем цены блюд
         const getPrice = (dishId) => {
-            const dish = this.dishes.find(d => d.id == dishId);
-            return dish ? dish.price : 300; // 300 по умолчанию
+            const dish = this.allDishes.find(d => d.id == dishId);
+            if (dish && dish.price) {
+                return parseInt(dish.price) || 300;
+            }
+            return 300; // Цена по умолчанию
         };
         
         if (order.soup_id) total += getPrice(order.soup_id);
@@ -205,7 +228,6 @@ class OrdersManager {
     async viewOrder(orderId) {
         console.log('👁️ Просмотр заказа:', orderId);
         
-        // ВАЖНО: сравниваем как строки
         const order = this.orders.find(o => String(o.id) === String(orderId));
         
         if (!order) {
@@ -272,110 +294,74 @@ class OrdersManager {
     }
 
     // ========== РЕДАКТИРОВАНИЕ ==========
-   // ========== РЕДАКТИРОВАНИЕ ЗАКАЗА ==========
-async editOrder(orderId) {
-    console.log('✏️ Редактирование заказа:', orderId);
-    
-    // Находим заказ (сравниваем как строки)
-    const order = this.orders.find(o => String(o.id) === String(orderId));
-    
-    if (!order) {
-        this.showError('Заказ не найден');
-        return;
-    }
-    
-    this.currentOrderId = orderId;
-    
-    // Заполняем форму
-    document.getElementById('edit-order-id').value = orderId;
-    document.getElementById('edit-full-name').value = order.full_name || '';
-    document.getElementById('edit-phone').value = order.phone || '';
-    document.getElementById('edit-email').value = order.email || '';
-    document.getElementById('edit-address').value = order.delivery_address || '';
-    document.getElementById('edit-comment').value = order.comment || '';
-    
-    // Получаем элементы формы
-    const nowRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="now"]');
-    const byTimeRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="by_time"]');
-    const timeContainer = document.getElementById('edit-time-container');
-    const timeInput = document.getElementById('edit-delivery-time');
-    
-    // Убедимся, что элементы существуют
-    if (!nowRadio || !byTimeRadio || !timeContainer || !timeInput) {
-        console.error('❌ Не найдены элементы формы редактирования');
-        return;
-    }
-    
-    // Сначала сбрасываем все обработчики (чтобы не дублировались)
-    const newNowRadio = nowRadio.cloneNode(true);
-    const newByTimeRadio = byTimeRadio.cloneNode(true);
-    nowRadio.parentNode.replaceChild(newNowRadio, nowRadio);
-    byTimeRadio.parentNode.replaceChild(newByTimeRadio, byTimeRadio);
-    
-    // Теперь получаем обновлённые элементы
-    const updatedNowRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="now"]');
-    const updatedByTimeRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="by_time"]');
-    
-    // Настраиваем время доставки
-    if (order.delivery_type === 'by_time' && order.delivery_time) {
-        updatedByTimeRadio.checked = true;
-        timeContainer.style.display = 'block';
+    async editOrder(orderId) {
+        console.log('✏️ Редактирование заказа:', orderId);
         
-        // Форматируем время из "HHmm" в "HH:MM"
-        const timeStr = String(order.delivery_time).padStart(4, '0');
-        const hours = timeStr.substring(0, 2);
-        const minutes = timeStr.substring(2, 4);
-        timeInput.value = `${hours}:${minutes}`;
+        const order = this.orders.find(o => String(o.id) === String(orderId));
         
-        // Делаем поле времени обязательным
-        timeInput.required = true;
-    } else {
-        updatedNowRadio.checked = true;
-        timeContainer.style.display = 'none';
-        timeInput.required = false;
-    }
-    
-    // Добавляем новые обработчики событий
-    updatedByTimeRadio.addEventListener('change', () => {
-        console.log('✅ Выбрано "К указанному времени"');
-        timeContainer.style.display = 'block';
-        timeInput.required = true;
-        timeInput.focus();
-    });
-    
-    updatedNowRadio.addEventListener('change', () => {
-        console.log('✅ Выбрано "Как можно быстрее"');
-        timeContainer.style.display = 'none';
-        timeInput.required = false;
-        timeInput.value = ''; // Очищаем поле времени
-    });
-    
-    // Также добавим обработчик на само поле времени для UX
-    timeInput.addEventListener('focus', () => {
-        // Если время не выбрано, устанавливаем минимальное
-        if (!timeInput.value) {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            timeInput.min = `${hours}:${minutes}`;
-            
-            // Устанавливаем время через час по умолчанию
-            const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
-            const defaultHours = oneHourLater.getHours().toString().padStart(2, '0');
-            const defaultMinutes = Math.ceil(oneHourLater.getMinutes() / 5) * 5;
-            const formattedMinutes = defaultMinutes.toString().padStart(2, '0');
-            timeInput.value = `${defaultHours}:${formattedMinutes}`;
+        if (!order) {
+            this.showError('Заказ не найден');
+            return;
         }
-    });
-    
-    this.openModal('edit-modal');
-}
+        
+        this.currentOrderId = orderId;
+        
+        // Заполняем форму
+        document.getElementById('edit-order-id').value = orderId;
+        document.getElementById('edit-full-name').value = order.full_name || '';
+        document.getElementById('edit-phone').value = order.phone || '';
+        document.getElementById('edit-email').value = order.email || '';
+        document.getElementById('edit-address').value = order.delivery_address || '';
+        document.getElementById('edit-comment').value = order.comment || '';
+        
+        // Получаем элементы формы
+        const nowRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="now"]');
+        const byTimeRadio = document.querySelector('#edit-modal input[name="delivery_type"][value="by_time"]');
+        const timeContainer = document.getElementById('edit-time-container');
+        const timeInput = document.getElementById('edit-delivery-time');
+        
+        if (!nowRadio || !byTimeRadio || !timeContainer || !timeInput) {
+            console.error('❌ Не найдены элементы формы редактирования');
+            return;
+        }
+        
+        // Настраиваем время доставки
+        if (order.delivery_type === 'by_time' && order.delivery_time) {
+            byTimeRadio.checked = true;
+            timeContainer.style.display = 'block';
+            
+            const timeStr = String(order.delivery_time).padStart(4, '0');
+            const hours = timeStr.substring(0, 2);
+            const minutes = timeStr.substring(2, 4);
+            timeInput.value = `${hours}:${minutes}`;
+            
+            timeInput.required = true;
+        } else {
+            nowRadio.checked = true;
+            timeContainer.style.display = 'none';
+            timeInput.required = false;
+        }
+        
+        // Обработчики событий
+        byTimeRadio.addEventListener('change', () => {
+            timeContainer.style.display = 'block';
+            timeInput.required = true;
+            timeInput.focus();
+        });
+        
+        nowRadio.addEventListener('change', () => {
+            timeContainer.style.display = 'none';
+            timeInput.required = false;
+            timeInput.value = '';
+        });
+        
+        this.openModal('edit-modal');
+    }
 
     // ========== УДАЛЕНИЕ ==========
     async deleteOrder(orderId) {
         console.log('🗑️ Удаление заказа:', orderId);
         
-        // ВАЖНО: сравниваем как строки
         const order = this.orders.find(o => String(o.id) === String(orderId));
         
         if (!order) {
@@ -414,7 +400,6 @@ async editOrder(orderId) {
             delivery_type: document.querySelector('#edit-modal input[name="delivery_type"]:checked').value
         };
         
-        // Время доставки
         if (orderData.delivery_type === 'by_time') {
             const timeValue = document.getElementById('edit-delivery-time').value;
             if (timeValue) {
@@ -424,14 +409,13 @@ async editOrder(orderId) {
         
         console.log('📝 Данные:', orderData);
         
-        // Блокируем кнопку
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Сохранение...';
         }
         
         try {
-            // 1. Сохраняем в API
+            // Сохраняем в API
             try {
                 await ApiService.updateOrder(orderId, orderData);
                 console.log('✅ Сохранено в API');
@@ -439,20 +423,17 @@ async editOrder(orderId) {
                 console.warn('⚠️ API недоступен:', apiError.message);
             }
             
-            // 2. Сохраняем локально (ОБЯЗАТЕЛЬНО)
+            // Сохраняем локально
             console.log('💾 Сохраняем локально...');
             
-            // Находим заказ
             const orderIndex = this.orders.findIndex(o => String(o.id) === String(orderId));
             
             if (orderIndex !== -1) {
-                // Обновляем в массиве
                 this.orders[orderIndex] = {
                     ...this.orders[orderIndex],
                     ...orderData
                 };
                 
-                // Обновляем в localStorage
                 const localOrders = JSON.parse(localStorage.getItem('foodConstructOrders') || '[]');
                 const localIndex = localOrders.findIndex(o => String(o.id) === String(orderId));
                 
@@ -466,10 +447,8 @@ async editOrder(orderId) {
                     console.log('✅ Сохранено в localStorage');
                 }
                 
-                // Обновляем отображение
                 this.renderOrders();
                 
-                // Закрываем окно и показываем уведомление
                 this.closeModal('edit-modal');
                 this.showNotification('✅ Изменения сохранены', 'success');
                 
@@ -482,7 +461,6 @@ async editOrder(orderId) {
             this.showError(`Ошибка: ${error.message}`);
             
         } finally {
-            // Разблокируем кнопку
             if (submitButton) {
                 submitButton.disabled = false;
                 submitButton.textContent = 'Сохранить';
@@ -497,7 +475,7 @@ async editOrder(orderId) {
         console.log('🗑️ Подтверждение удаления:', orderId);
         
         try {
-            // 1. Удаляем из API
+            // Удаляем из API
             try {
                 await ApiService.deleteOrder(orderId);
                 console.log('✅ Удалено из API');
@@ -505,23 +483,19 @@ async editOrder(orderId) {
                 console.warn('⚠️ API недоступен:', apiError.message);
             }
             
-            // 2. Удаляем локально (ОБЯЗАТЕЛЬНО)
+            // Удаляем локально
             console.log('🗑️ Удаляем локально...');
             
-            // Удаляем из массива
             this.orders = this.orders.filter(o => String(o.id) !== String(orderId));
             
-            // Удаляем из localStorage
             const localOrders = JSON.parse(localStorage.getItem('foodConstructOrders') || '[]');
             const filteredOrders = localOrders.filter(o => String(o.id) !== String(orderId));
             localStorage.setItem('foodConstructOrders', JSON.stringify(filteredOrders));
             
             console.log('✅ Удалено локально');
             
-            // Обновляем отображение
             this.renderOrders();
             
-            // Закрываем окно и показываем уведомление
             this.closeModal('delete-modal');
             this.showNotification('✅ Заказ удален', 'success');
             
@@ -586,6 +560,8 @@ function confirmDelete() {
 
 // Инициализация
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🔧 Инициализация OrdersManager...');
+    
     window.ordersManager = new OrdersManager();
     window.ordersManager.loadOrders();
     
@@ -597,48 +573,4 @@ document.addEventListener('DOMContentLoaded', () => {
             window.ordersManager.submitEditForm(e);
         });
     }
-    
-    // Добавляем стили для анимации
-    if (!document.querySelector('#notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes notificationSlideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
 });
-
-// Отладочная функция
-window.debugOrders = function() {
-    if (!window.ordersManager) {
-        console.log('❌ OrdersManager не инициализирован');
-        return;
-    }
-    
-    console.log('=== ДЕБАГ ЗАКАЗОВ ===');
-    console.log('Всего заказов:', window.ordersManager.orders.length);
-    
-    window.ordersManager.orders.forEach((order, i) => {
-        console.log(`${i + 1}. ID: "${order.id}" (тип: ${typeof order.id})`);
-        console.log(`   Имя: ${order.full_name}`);
-        console.log(`   Можно удалить?`, String(order.id) !== 'undefined');
-    });
-    
-    // Проверяем localStorage
-    const localOrders = JSON.parse(localStorage.getItem('foodConstructOrders') || '[]');
-    console.log('=== LOCALSTORAGE ===');
-    console.log('Заказов в localStorage:', localOrders.length);
-    localOrders.forEach((order, i) => {
-        console.log(`${i + 1}. ID: "${order.id}" (тип: ${typeof order.id})`);
-    });
-};
