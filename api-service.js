@@ -1,15 +1,11 @@
-// api-service.js - ИСПРАВЛЕННАЯ ВЕРСИЯ С СИНХРОНИЗАЦИЕЙ ДАННЫХ
 class ApiService {
-    // Базовые настройки API
     static API_URL = 'https://edu.std-900.ist.mospolytech.ru';
-    static API_KEY = '85a29bce-19e0-49bc-9422-9a3101ec476d'; // ТВОЙ API КЛЮЧ
+    static API_KEY = '85a29bce-19e0-49bc-9422-9a3101ec476d'; 
     
     // Глобальные данные
     static dishes = [];
     static localOrdersKey = 'foodConstructOrders';
     static lastOrderKey = 'lastOrder';
-
-    // ========== МЕТОДЫ ДЛЯ РАБОТЫ С ЗАКАЗАМИ ==========
 
     // 1. ПОЛУЧИТЬ ВСЕ ЗАКАЗЫ (из API + localStorage)
     static async getOrders() {
