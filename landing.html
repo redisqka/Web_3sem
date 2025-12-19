@@ -383,7 +383,7 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="display-5 fw-bold mb-3">Остались вопросы? Напишите нам!</h2>
-                <p class="lead text-muted">Мы поможем подобрать оптимальный вариант для вашего офиса</p>
+
             </div>
             
             <div class="row">
@@ -391,38 +391,34 @@
                     <div class="contact-form">
                         <form id="landing-contact-form" action="https://httpbingo.org/post" method="POST">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Ваше имя</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Иванов Иван" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="company" class="form-label">Компания</label>
-                                        <input type="text" class="form-control" id="company" name="company">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="ivanovivan@mail.ru" required>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                            <div>
+                                <div class="col-md-12">
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Телефон</label>
-                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="8(900)000-00-00">
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="message" class="form-label">Сообщение</label>
-                                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Расскажите о потребностях вашего офиса..."></textarea>
+                                <textarea class="form-control" id="message" name="message" rows="4"></textarea>
                             </div>
                             
                             <div class="mb-3 form-check">
