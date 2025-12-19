@@ -1,0 +1,402 @@
+
+.orders-container {
+    padding: 40px 0;
+}
+
+.orders-section {
+    background-color: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 32px 32px 0 32px;
+    border-bottom: 1px solid rgba(255, 99, 71, 0.1);
+}
+
+.section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+}
+
+.section-subtitle {
+    color: #666;
+    margin: 0 0 20px 0;
+    font-size: 16px;
+}
+
+.section-content {
+    padding: 32px;
+}
+
+/* Таблица заказов */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 99, 71, 0.1);
+}
+
+.orders-table th {
+    background-color: rgba(255, 99, 71, 0.05);
+    font-weight: 700;
+    color: #2d2d2d;
+}
+
+.orders-table tr:hover {
+    background-color: rgba(255, 99, 71, 0.02);
+}
+
+.order-number {
+    font-weight: 600;
+    color: tomato;
+}
+
+.order-date {
+    color: #666;
+    white-space: nowrap;
+}
+
+.order-dishes {
+    max-width: 300px;
+}
+
+.order-dishes span {
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.order-price {
+    font-weight: 700;
+    color: tomato;
+    white-space: nowrap;
+}
+
+.order-time {
+    color: #666;
+}
+
+.actions-cell {
+    white-space: nowrap;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 4px;
+}
+
+.action-button:hover {
+    background-color: rgba(255, 99, 71, 0.1);
+    color: tomato;
+}
+
+.action-button.view:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+.action-button.edit:hover {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #FFC107;
+}
+
+.action-button.delete:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+/* Состояния */
+.loading-state {
+    text-align: center;
+    padding: 60px 0;
+    color: #666;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666;
+}
+
+.empty-state p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Модальные окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid rgba(255, 99, 71, 0.1);
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.modal-close:hover {
+    background-color: rgba(255, 99, 71, 0.1);
+    color: tomato;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    padding: 24px;
+    border-top: 1px solid rgba(255, 99, 71, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Форма редактирования */
+.order-edit-form {
+    display: grid;
+    gap: 20px;
+}
+
+.order-details {
+    display: grid;
+    gap: 16px;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #666;
+}
+
+.detail-value {
+    color: #2d2d2d;
+}
+
+.dishes-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.dishes-list li {
+    margin-bottom: 4px;
+}
+
+/* Кнопки */
+.secondary-button {
+    padding: 12px 24px;
+    border: 2px solid rgba(255, 99, 71, 0.3);
+    border-radius: 12px;
+    background-color: transparent;
+    color: tomato;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.secondary-button:hover {
+    border-color: tomato;
+    background-color: rgba(255, 99, 71, 0.1);
+}
+
+.delete-button {
+    background-color: #F44336;
+    border: none;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #D32F2F;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .section-content {
+        padding: 20px;
+    }
+    
+    .orders-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .orders-table th,
+    .orders-table td {
+        padding: 12px 8px;
+        font-size: 14px;
+    }
+    
+    .modal {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .detail-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    
+    .detail-label {
+        margin-bottom: 4px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.notification {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Добавь в конец orders.css */
+.dishes-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.dishes-list li {
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+    z-index: 1100;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification.error {
+    background-color: #F44336;
+}
+
+.notification.info {
+    background-color: #2196F3;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}

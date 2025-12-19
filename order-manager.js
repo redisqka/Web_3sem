@@ -1,4 +1,3 @@
-// order-manager.js
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('Order Manager: DOM загружен');
     

@@ -20,6 +20,7 @@
                 <li class="header_item"><a class="nav_link" href="./index.html">Главная</a></li>
                 <li class="header_item"><a class="nav_link" href="./lunch.html">Собрать ланч</a></li>
                 <li class="header_item"><a class="nav_link active" href="./checkout.html">Оформить заказ</a></li>
+                <li class="header_item"><a class="nav_link" href="./orders.html">Заказы</a></li>
             </ul>
         </nav>
     </div>
@@ -111,7 +112,6 @@
                                     <p class="form-hint">Доставка доступна с 07:00 до 23:00 с шагом 5 минут</p>
                                 </div>
                             </div>
-                            <input type="hidden" name="student_id" id="student-id" value="123456">
                             <button type="submit" class="primary-button submit-button">Отправить заказ</button>
                         </form>
                     </div>
@@ -133,6 +133,80 @@
 <script src="order-validation.js"></script> <!-- Важно: перед checkout-manager.js -->
 <script src="checkout-manager.js"></script>
 <script src="api-service.js"></script>
+<script>
+// Простой обработчик для переключения времени доставки
+document.addEventListener('DOMContentLoaded', function() {
+    // Находим элементы
+    const timeRadios = document.querySelectorAll('input[name="delivery_type"]');
+    const timeContainer = document.getElementById('time-input-container');
+    const timeInput = document.getElementById('delivery-time');
+    
+    if (!timeRadios.length || !timeContainer || !timeInput) return;
+    
+    // Функция для обновления видимости
+    function updateTimeVisibility() {
+        const selectedValue = document.querySelector('input[name="delivery_type"]:checked').value;
+        
+        if (selectedValue === 'by_time') {
+            timeContainer.style.display = 'block';
+            timeInput.required = true;
+            
+            // Устанавливаем минимальное время
+            setMinTime();
+            
+            // Фокусируемся на поле
+            setTimeout(() => timeInput.focus(), 100);
+        } else {
+            timeContainer.style.display = 'none';
+            timeInput.required = false;
+        }
+    }
+    
+    // Функция установки минимального времени
+    function setMinTime() {
+        const now = new Date();
+        const oneHourLater = new Date(now.getTime() + 60 * 60 * 1000);
+        
+        let hours = Math.max(7, oneHourLater.getHours());
+        let minutes = Math.ceil(oneHourLater.getMinutes() / 5) * 5;
+        
+        if (minutes >= 60) {
+            minutes = 0;
+            hours += 1;
+        }
+        
+        if (hours >= 23) {
+            hours = 23;
+            minutes = 0;
+        }
+        
+        const hoursStr = hours.toString().padStart(2, '0');
+        const minutesStr = minutes.toString().padStart(2, '0');
+        const minTime = `${hoursStr}:${minutesStr}`;
+        
+        timeInput.min = minTime;
+        
+        if (!timeInput.value || timeInput.value < minTime) {
+            timeInput.value = minTime;
+        }
+    }
+    
+    // Добавляем обработчики на все радиокнопки
+    timeRadios.forEach(radio => {
+        radio.addEventListener('change', updateTimeVisibility);
+    });
+    
+    // Инициализируем состояние
+    updateTimeVisibility();
+    
+    // Также настраиваем поле времени при фокусе
+    timeInput.addEventListener('focus', function() {
+        if (!this.value) {
+            setMinTime();
+        }
+    });
+});
+</script>
 
 <script>
     // Проверяем загрузку
@@ -140,5 +214,6 @@
     console.log('window.dishes существует:', typeof window.dishes !== 'undefined');
     console.log('window.dishes длина:', window.dishes ? window.dishes.length : 'нет');
 </script>
+
 </body>
 </html>
